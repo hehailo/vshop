@@ -30,29 +30,28 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 #vshop
-
 1.安装环境
 
+##git命令
 
-常用的git命令
-
-git 命令‘
+```powershell
 
 git init
+
 git add README.md
+
 git commit -m "first commit"
-git branch -M master
-git remote add origin https://github.com/hehailo/vshop.git
-git push -u origin main
-
 
 git remote add origin https://github.com/hehailo/vshop.git
-git branch -M master
-git push -u origin master
+
+git branch master
+
+git push origin master
 
 拉取代码 
 git pull origin master
 
+```
 
 
 
