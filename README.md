@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # vshop
 
 ## Project setup
@@ -22,3 +23,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# vhop
+>>>>>>> cbd2ba1308f325c45a5daa8c39060fe5195555bb
