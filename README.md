@@ -56,3 +56,21 @@ git pull origin master
 
 
 
+
+
+2 组件拆分
+    4 个页面
+         首页 搜索结果页 登陆 注册
+    组件拆分
+        路由组件
+            Home 
+            Search 
+            Login 没有footer
+            Register 没有footer
+    非路由组件
+        Header Footer
+
+3.header和footer    
+    安装less
+    npm install --save less less-loader@7
+    
