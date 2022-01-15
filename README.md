@@ -226,5 +226,82 @@ git pull origin master
 
   Home Search Dtail等组件用到
   注册为全局组件 全局组件只需要一次引入
-  
 
+
+10 axios二次封装
+
+
+    接口前缀都有 /api
+    XMlHttpRequest fetch jquery axios
+
+    请求拦截器
+    响应拦截器
+
+
+    安装
+        npm install axios
+
+    axios使用
+        添加请求拦截器
+            axios.interceptors.request.use(function (config) {
+                // 在发送请求之前做些什么
+                return config;
+            }, function (error) {
+                // 对请求错误做些什么
+                return Promise.reject(error);
+            });
+
+        添加响应拦截器
+            axios.interceptors.response.use(function (response) {
+                // 对响应数据做点什么
+                return response;
+            }, function (error) {
+                // 对响应错误做点什么
+                return Promise.reject(error);
+            });
+
+        如果你想在稍后移除拦截器，可以这样：
+            var myInterceptor = axios.interceptors.request.use(function () {/*...*/});
+            axios.interceptors.request.eject(myInterceptor);
+
+        可以为自定义 axios 实例添加拦截器
+            var instance = axios.create();
+            instance.interceptors.request.use(function () {/*...*/});
+
+        执行 GET 请求
+            // 为给定 ID 的 user 创建请求
+            axios.get('/user?ID=12345')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+            // 可选地，上面的请求可以这样做
+            axios.get('/user', {
+                params: {
+                ID: 12345
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            执行 POST 请求
+
+            axios.post('/user', {
+                firstName: 'Fred',
+                lastName: 'Flintstone'
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+11 接口管理s
