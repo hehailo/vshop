@@ -1,8 +1,8 @@
 <template>
   <div>
    <Header></Header>
-   哈哈哈哈
-   <Footer></Footer>
+    <router-view></router-view>
+   <Footer v-show="$route.meta.showfooter"></Footer>
   </div>
 </template>
 
