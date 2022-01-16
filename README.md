@@ -385,7 +385,94 @@ git pull origin master
 
  13 typenav 三级联动 动态
 
+    数据展示
+
+        "data": [
+            {
+                "categoryChild": [
+                    {
+                        "categoryChild": [
+                            { "categoryName": "电子书", "categoryId": 1 },
+                            { "categoryName": "网络原创", "categoryId": 2 },
+                            { "categoryName": "数字杂志", "categoryId": 3 },
+                            { "categoryName": "多媒体图书", "categoryId": 4 }
+                        ],
+                        "categoryName": "电子书刊",
+                        "categoryId": 1
+                    },
+                ],
+                "categoryName": "图书、音像、电子书刊",
+                "categoryId": 1
+            },
+        ]
+
+    动态添加背景颜色
+        1.样式完成
+            hover
+        2.js完成
+            鼠标移入 分类变色 
+            :class="{ cur: currentIndex == index }"
+
+    二三级分类显示和隐藏
+        1.样式完成
+            一开始默认隐藏 hover时候 display block
+             &:hover {
+                .item-list {
+                display: block;
+                }
+             }
+
+        2.js完成
+          <div class="item-list clearfix" :style="{display:currentIndex == index?'block':'none'}">
+
+14 解决卡顿问题
+    鼠标快速下滑 触发事件频繁 浏览器反应不过来 只有部分执行
+
+    防抖和截流
+
+    防抖：
+        前面所有的触发都取消 最后一次执行后，过去规定的时间之后才会触发，也就是说，如果连续快速的触发 只会执行一次
+    节约流
+        在规定的间隔时间范围内不会重复触发回调，只有大于这个时间间隔才会触发回调，把频繁触发变为少量触发
+
+    自己的理解
+        防抖：最后一次触发事件回调后 一段时间内不在触发 则执行回调
+        节流：一段时间内，事件回调只执行一次
+
+    使用lodash
+        不用下载安装 但需要引入
+        _debounce 防抖
+        _throttle 截流
+
+    三级联动截流的操作
 
 
+15 三级联动路由跳转分析
 
+    点击分类 跳转到搜索页面
+    路由跳转
+    声明式  router-link
+    编程式  push/replace
 
+    声明式
+        1、可以实现
+        2、router-link 是一个（路由内置的）组件
+            当服务器数据返回之后，循环出大量（1000+）router-link组件（创建组件实例） 
+            非常耗内存 会出现卡顿
+
+    编程式：
+        1、可以实现
+        2、循环中，进行逐渐一绑定，会绑定大量回调
+        3、利用`事件委派`解决！
+            存在的问题 
+                怎么保证点击的一定是a标签
+                如何获取参数
+                如何确定是二级分类/三级分类
+
+    解决方案：编程式+事件委派+自定义属性
+
+16 搜索模块中的三级联动与过度动画
+
+     home组件中 TypeNav 显示
+     search组件 TypeNav 默认隐藏
+        划上去 显示 + 动画

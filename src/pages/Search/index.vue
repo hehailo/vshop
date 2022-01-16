@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{keyword}}
+    <TypeNav></TypeNav>
   </div>
 </template>
 

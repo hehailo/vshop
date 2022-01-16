@@ -2,7 +2,65 @@
   <!-- 商品分类导航 -->
   <div class="type-nav">
     <div class="container">
-      <h2 class="all">全部商品分类</h2>
+      <!-- 事件委派 -->
+      <div @mouseleave="leaveShow" @mouseenter="enterShow">
+        <h2 class="all">全部商品分类</h2>
+        <!-- 一级分类 -->
+        <transition name="sort">
+          <div class="sort" v-show="show">
+            <div class="all-sort-list2" @click="goSearch">
+              <div
+                class="item bo"
+                v-for="(item, index) in catgorylist"
+                :key="item.categoryId"
+                :class="{ cur: currentIndex == index }"
+              >
+                <h3 @mouseenter="changeIndex(index)">
+                  <a
+                    :data-categoryName="item.categoryName"
+                    :data-category1id="item.categoryId"
+                    >{{ item.categoryName }}</a
+                  >
+                </h3>
+                <!-- 二，三级分类 -->
+                <div
+                  class="item-list clearfix"
+                  :style="{ display: currentIndex == index ? 'block' : 'none' }"
+                >
+                  <div
+                    class="subitem"
+                    v-for="item12 in item.categoryChild"
+                    :key="item12.categoryId"
+                  >
+                    <dl class="fore">
+                      <dt>
+                        <a
+                          :data-categoryName="item12.categoryName"
+                          :data-category2id="item12.categoryId"
+                          >{{ item12.categoryName }}</a
+                        >
+                      </dt>
+                      <dd>
+                        <em
+                          v-for="item13 in item12.categoryChild"
+                          :key="item13.categoryId"
+                        >
+                          <a
+                            :data-categoryName="item13.categoryName"
+                            :data-category3id="item13.categoryId"
+                            >{{ item13.categoryName }}</a
+                          >
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -13,39 +71,29 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort">
-        <div class="all-sort-list2">
-          <div class="item bo" v-for="item in catgorylist" :key="item.categoryId">
-            <h3>
-              <a href="">{{item.categoryName}}</a>
-            </h3>
-            <div class="item-list clearfix">
-              <div class="subitem" v-for="item12 in item.categoryChild" :key="item12.categoryId">
-                <dl class="fore">
-                  <dt>
-                    <a href="">{{item12.categoryName}}</a>
-                  </dt>
-                  <dd>
-                    <em v-for="item13 in item12.categoryChild" :key="item13.categoryId">
-                      <a href="">{{item13.categoryName}}</a>
-                    </em>
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+// 按需引入 节流
+import throttle from "lodash/throttle";
+
 export default {
   name: "TypeNav",
+  data() {
+    return {
+      currentIndex: -1,
+      show: true,
+    };
+  },
   mounted() {
     this.$store.dispatch("reqCategoryList");
+    console.log(this.$route.path);
+    if (this.$route.path == "/search") {
+      this.show = false;
+    }
   },
   computed: {
     ...mapState({
@@ -55,8 +103,44 @@ export default {
     }),
   },
   methods: {
-    show() {
-      console.log(this.$store);
+    // 节流
+    // changeIndex(index) {
+    //   this.currentIndex = index;
+    // },
+    changeIndex: throttle(function (index) {
+      this.currentIndex = index;
+    }, 50),
+    leaveShow() {
+      this.currentIndex = -1;
+      // search隐藏目录
+      if (this.$route.path == "/search") {
+        this.show = false;
+      }
+    },
+    enterShow() {
+      // search展示目录
+      if (this.$route.path == "/search") {
+        this.show = true;
+      }
+    },
+    goSearch(event) {
+      let element = event.target;
+      let { categoryname, category1id, category2id, category3id } =
+        element.dataset;
+      let location = { name: "search" };
+      let query = {};
+      // 带有categoryname 的是a标签 是目录
+      if (categoryname) {
+        if (category1id) {
+          query.category1Id = category1id;
+        } else if (category2id) {
+          query.category2Id = category2id;
+        } else if (category3id) {
+          query.category3Id = category3id;
+        }
+        location.query = query;
+        this.$router.push(location);
+      }
     },
   },
 };
@@ -172,13 +256,27 @@ export default {
             }
           }
 
-          &:hover {
-            .item-list {
-              display: block;
-            }
-          }
+          // &:hover {
+          //   .item-list {
+          //     display: block;
+          //   }
+          // }
+        }
+
+        .cur {
+          background-color: skyblue;
         }
       }
+    }
+
+    .sort-enter {
+      height: 0px;
+    }
+    .sort-enter-to{
+      height: 461px;
+    }
+    .sort-enter-active{
+      transition: all 0.5s linear;
     }
   }
 }
