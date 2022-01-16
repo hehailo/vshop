@@ -89,9 +89,10 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("reqCategoryList");
+    // this.$store.dispatch("reqCategoryList");
     console.log(this.$route.path);
-    if (this.$route.path == "/search") {
+    // if (this.$route.path == "/search") {
+    if (this.$route.path.indexOf("/search" ) != -1) {
       this.show = false;
     }
   },
@@ -113,13 +114,14 @@ export default {
     leaveShow() {
       this.currentIndex = -1;
       // search隐藏目录
-      if (this.$route.path == "/search") {
+      if (this.$route.path.indexOf("/search") != -1) {
         this.show = false;
       }
     },
     enterShow() {
       // search展示目录
-      if (this.$route.path == "/search") {
+      if (this.$route.path.indexOf("/search") != -1) {
+        // if (this.$route.path == "/search") {
         this.show = true;
       }
     },
@@ -131,6 +133,7 @@ export default {
       let query = {};
       // 带有categoryname 的是a标签 是目录
       if (categoryname) {
+        query.categoryname = categoryname;
         if (category1id) {
           query.category1Id = category1id;
         } else if (category2id) {
@@ -139,6 +142,9 @@ export default {
           query.category3Id = category3id;
         }
         location.query = query;
+        if (this.$route.params) {
+          location.params = this.$route.params;
+        }
         this.$router.push(location);
       }
     },
@@ -272,10 +278,10 @@ export default {
     .sort-enter {
       height: 0px;
     }
-    .sort-enter-to{
+    .sort-enter-to {
       height: 461px;
     }
-    .sort-enter-active{
+    .sort-enter-active {
       transition: all 0.5s linear;
     }
   }

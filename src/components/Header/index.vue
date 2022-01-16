@@ -64,10 +64,14 @@ export default {
   methods: {
     goSearch() {
       // this.$router.push("/search/"+this.keyWord)
-      this.$router.push({
+      let location = {
         name: "search",
         params: { keyword: this.keyWord || undefined },
-      });
+      };
+      if (this.$route.query) {
+        location.query = this.$route.query;
+      }
+      this.$router.push(location);
     },
   },
 };

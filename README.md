@@ -445,11 +445,18 @@ git pull origin master
         _throttle 截流
 
     三级联动截流的操作
+        changeIndex: throttle(function (index) {
+        this.currentIndex = index;
+        }, 50),
 
 
 15 三级联动路由跳转分析
 
     点击分类 跳转到搜索页面
+        http://localhost:8080/#/search?categoryname=学习&category1Id=5
+        http://localhost:8080/#/search?categoryname=学习&category3Id=1
+        http://localhost:8080/#/search?categoryname=学习&category3Id=63
+
     路由跳转
     声明式  router-link
     编程式  push/replace
@@ -470,9 +477,50 @@ git pull origin master
                 如何确定是二级分类/三级分类
 
     解决方案：编程式+事件委派+自定义属性
+        goSearch(event) {
+            let element = event.target;
+            let { categoryname, category1id, category2id, category3id } =
+                element.dataset;
+            let location = { name: "search" };
+            let query = {};
+            // 带有categoryname 的是a标签 是目录
+            if (categoryname) {
+                if (category1id) {
+                query.category1Id = category1id;
+                } else if (category2id) {
+                query.category2Id = category2id;
+                } else if (category3id) {
+                query.category3Id = category3id;
+                }
+                location.query = query;
+                this.$router.push(location);
+            }
+        },
 
 16 搜索模块中的三级联动与过度动画
 
-     home组件中 TypeNav 显示
-     search组件 TypeNav 默认隐藏
-        划上去 显示 + 动画
+    home组件中 TypeNav 显示
+    search组件 TypeNav 默认隐藏
+       划上去 显示 + 动画
+
+    优化
+        在home组件、search组件中都有TypeNav组件
+        TypeNav组件每次挂载都会发送请求 获取数据 重复发送请求
+
+        因此将发送请求放在 App.vue中 因为 App.vue 只会挂载一次
+        this.$store.dispatch("reqCategoryList");
+
+17 参数合并
+    http://localhost:8080/#/search/小米
+    http://192.168.2.5:8080/#/search?categoryname=学习&category1Id=5
+    params和query参数合并
+    http://192.168.2.5:8080/#/search/%E5%B0%8F%E7%B1%B3?category1Id=4
+    
+
+    核心： this.$route代表的就是当前地址栏
+
+    实现
+        if (this.$route.query) {
+            location.query = this.$route.query;
+        }
+        this.$router.push(location);
