@@ -281,7 +281,7 @@ git pull origin master
             // 可选地，上面的请求可以这样做
             axios.get('/user', {
                 params: {
-                ID: 12345
+                    ID: 12345
                 }
             })
             .then(function (response) {
@@ -304,4 +304,88 @@ git pull origin master
             });
 
 
-11 接口管理s
+11 接口管理
+    向服务器发请求
+    小项目 在组件的生命周期中发送请求 mounted()
+    大项目 axios.get()
+
+    跨域问题 
+        协议 域名 端口号 不同 会出现跨域问题
+    
+    解决方案
+        jsonp cros 代理
+
+    webpack
+         https://v4.webpack.docschina.org/configuration/dev-server/#devserver
+
+        请求到 /api/users 现在会被代理到请求 http://localhost:3000/api/users。
+        如果你不想始终传递 /api ，则需要重写路径：
+
+        module.exports = {
+            //...
+            devServer: {
+                proxy: {
+                    '/api': {
+                        target: 'https://other-server.example.com',
+                        secure: false
+                    }
+                }
+            }
+        };
+
+        配置文件修改需要重新启动项目！
+
+
+12  nprogress进度条的使用
+     
+     npm install nprogress
+
+     在请求拦截器中使用
+     start 进度条开始
+     done 进度条结束
+
+    import nprogress from 'nprogress';
+    //引入进度条样式
+    import 'nprogress/nprogress.css'
+
+13 vuex
+
+    官方插件 状态管理库 集中收管理项目组件公用数据
+    mutation
+    action
+    state
+    module
+    getters
+
+    模块化
+        inndex
+            import home from "./home";
+            import search from "./search";
+
+            export default new Vuex.Store({
+            modules: {
+                home,
+                search,
+            },
+            });
+        home
+            //home
+            const state = {};
+            const mutations = {};
+            const actions = {};
+            const getters = {};
+
+            export default {
+                state,
+                mutations,
+                actions,
+                getters,
+            };
+ 
+
+ 13 typenav 三级联动 动态
+
+
+
+
+
