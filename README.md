@@ -524,3 +524,10 @@ git pull origin master
             location.query = this.$route.query;
         }
         this.$router.push(location);
+
+18 mockjs模拟数据
+    1、安装
+    npm install mockjs
+    2、
+    
+    
