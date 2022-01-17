@@ -14,7 +14,6 @@ const mutations = {
     state.bannerlist = params;
   },
   FLOORLIST(state, params) {
-    console.log(params);
     state.floorlist = params;
   },
 };

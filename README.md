@@ -627,7 +627,7 @@ git pull origin master
             })
 
 
-17 floor组件mock数据
+21 floor组件mock数据
 
     floor组件复用  因此不能在内部发请求 遍历
     发请求应该在其父组件中发送
@@ -658,5 +658,91 @@ git pull origin master
         因此可以在此时 使用插件
 
 
+22 把首页的轮播图拆成全局组件
 
-        
+    两处地方的写法不一样
+        watch  ListContainer
+        mounted  Floor
+    
+    在Floor中尝试使用watch
+        因为floor中数据没有发生变化 
+        immdiate：true 立即执行
+    
+
+    1.定义组件 components文件夹
+    2.全局注册
+        import Carousel from '@/components/Carousel';
+        Vue.component(Carousel.name,Carousel)
+    3.使用
+         <Carousel :list="list.carouselList"></Carousel>
+
+
+23 search模块的静态组件
+
+    vuex操作
+
+    post 请求 传递参数
+
+    action可以接受两个参数 contxet 和 方法入参
+       actions: {
+           checkout ({ commit, state }, products) {
+           }
+       }
+    箭头函数 默认参数
+       async getSearchlist({ commit }, params={}) {
+
+       }
+
+
+    捞取数据
+
+    写法比较麻烦
+        computed:{
+            ...mapState({
+                goodsList:state =>state.search.searchlist.goodsList
+            })
+        }
+
+    使用getters
+        相当于vuex的计算属性 ，简化仓库中的数据
+        注意：仓库中的getters是不分模块的 state是分的
+        mapGetters里面的传递的是数组
+
+        const getters = {
+            // state是当前仓库的state
+            goodsList(state){
+                console.log(state.searchlist);
+                return state.searchlist.goodsList || {};
+            },
+        }
+
+        computed:{
+            ...mapGetters(['goodsList'])
+        }
+
+
+
+24 search根据不同的参数获取数据
+
+    1.在data里面定义需要传递的参数 及其 默认值，使得入参变成响应式的
+    2.定义查询回调
+    3.组件挂载之前需要根据地址栏参数，的时候要去查询结果
+
+    两种对象合并
+        ES6：object.assign
+            let obj1 = {name:'a',age:18};
+            let obj2 = {name:'b',gender:'man'};
+            let obj3 = {};
+            Object.assign(obj3,obj1,obj2);
+            console.log(obj3);//{name: "b", age: 18, gender: "man"}
+
+        ES6：拓展运算
+            let obj1 = {name:'a',age:18};
+            let obj2 = {name:'b',gender:'man'};
+            let obj3 = {...obj1,...obj2};
+
+
+25 子组件动态数据
+    不需要父组件传值
+    从getters里面获取数据就可以了
+

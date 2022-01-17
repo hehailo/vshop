@@ -4,16 +4,27 @@ import App from "./App.vue";
 import router from "./router";
 //引入vuex
 import store from './store';
-//引入全局组件 三级联动
-import TypeNav from '@/components/TypeNav';
+
+
+// 引入样式
 //引入mockServe
 import '@/mock/mockServe'
 // swiper 样式引入
 import 'swiper/css/swiper.css'
 
-Vue.config.productionTip = false;
+
+//引入全局组件 三级联动
+import TypeNav from '@/components/TypeNav';
+import Carousel from '@/components/Carousel';
+
 
 Vue.component(TypeNav.name,TypeNav)
+Vue.component(Carousel.name,Carousel)
+
+
+
+Vue.config.productionTip = false;
+
 
 new Vue({
   router,

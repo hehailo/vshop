@@ -27,6 +27,7 @@ requests.interceptors.request.use(
 // 响应拦截器
 requests.interceptors.response.use(
   (response) => {
+    // response 包括响应头等hhtp请求的部分
     console.log('响应拦截',response.data);
     nprogress.done();
     return response.data;

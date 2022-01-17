@@ -24,43 +24,27 @@
               <img :src="list.imgUrl" />
             </div>
             <div class="floorBanner">
-              <div class="swiper-container" ref="floor1Swiper">
-                <div class="swiper-wrapper">
-                  <div
-                    class="swiper-slide"
-                    v-for="carouse in list.carouselList"
-                    :key="carouse.id"
-                  >
-                    <img :src="carouse.imgUrl" />
-                  </div>
-                </div>
-                <!-- 如果需要分页器 -->
-                <div class="swiper-pagination"></div>
-
-                <!-- 如果需要导航按钮 -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-              </div>
+                <Carousel :list="list.carouselList"></Carousel>
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img :src="lit.recommendList[0]" />
+                <img :src="list.recommendList[0]" />
               </div>
               <div class="floor-conver-pit">
-                <img :src="lit.recommendList[1]" />
+                <img :src="list.recommendList[1]" />
               </div>
             </div>
             <div class="split center">
-              <img :src="lit.bigImg" />
+              <img :src="list.bigImg" />
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img :src="lit.recommendList[2]" />
+                <img :src="list.recommendList[2]" />
               </div>
               <div class="floor-conver-pit">
-                <img :src="lit.recommendList[3]" />
+                <img :src="list.recommendList[3]" />
               </div>
             </div>
           </div>
@@ -71,29 +55,29 @@
 </template>
 
 <script>
-import Swiper from "swiper";
 // import {mapState} from 'vuex';
 export default {
   name: "Floor",
   props: ["list"],
   mounted() {
-    new Swiper(this.$refs.floor1Swiper, {
-      direction: "horizontal", // 垂直切换选项
-      loop: true, // 循环模式选项
-
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
+    // new Swiper(this.$refs.floor1Swiper, {
+    // });
   },
+  // watch:{
+  //   list:{
+  //     //list没有发生改变 需要初始化执行该方法
+  //     immediate:true,
+  //     handler(){
+  //       this.$nextTick(
+  //         ()=>{
+  //           new Swiper(this.$refs.floor1Swiper, {
+  //           });
+  //         }
+  //       )
+  //     }
+
+  //   }
+  // },
   computed: {},
 };
 </script>
