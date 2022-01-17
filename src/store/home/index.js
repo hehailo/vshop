@@ -1,19 +1,43 @@
 //home
 
-import { reqCategoryList } from "@/api";
+import { reqCategoryList, reqBannerList, reqFloorlist } from "@/api";
 const state = {
-  catgorylist:[]
+  catgorylist: [],
+  bannerlist: [],
+  floorlist: [],
 };
 const mutations = {
-  CATROREYLIST(state,params){
-    state.catgorylist = params
-  }
+  CATROREYLIST(state, params) {
+    state.catgorylist = params;
+  },
+  BANNERLIST(state, params) {
+    state.bannerlist = params;
+  },
+  FLOORLIST(state, params) {
+    console.log(params);
+    state.floorlist = params;
+  },
 };
 const actions = {
+  //categorylist
   async reqCategoryList(context) {
     let result = await reqCategoryList();
     if (result.code == 200) {
-      context.commit("CATROREYLIST",result.data);
+      context.commit("CATROREYLIST", result.data);
+    }
+  },
+  //banner
+  async getBannerlist(context) {
+    let result = await reqBannerList();
+    if (result.code == 200) {
+      context.commit("BANNERLIST", result.data);
+    }
+  },
+  //floor
+  async getFloorList({ commit }) {
+    let result = await reqFloorlist();
+    if (result.code == 200) {
+      commit("FLOORLIST", result.data);
     }
   },
 };

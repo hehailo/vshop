@@ -6,6 +6,10 @@ import router from "./router";
 import store from './store';
 //引入全局组件 三级联动
 import TypeNav from '@/components/TypeNav';
+//引入mockServe
+import '@/mock/mockServe'
+// swiper 样式引入
+import 'swiper/css/swiper.css'
 
 Vue.config.productionTip = false;
 

@@ -383,7 +383,7 @@ git pull origin master
             };
  
 
- 13 typenav 三级联动 动态
+ 14 typenav 三级联动 动态
 
     数据展示
 
@@ -425,7 +425,7 @@ git pull origin master
         2.js完成
           <div class="item-list clearfix" :style="{display:currentIndex == index?'block':'none'}">
 
-14 解决卡顿问题
+15 解决卡顿问题
     鼠标快速下滑 触发事件频繁 浏览器反应不过来 只有部分执行
 
     防抖和截流
@@ -450,7 +450,7 @@ git pull origin master
         }, 50),
 
 
-15 三级联动路由跳转分析
+16 三级联动路由跳转分析
 
     点击分类 跳转到搜索页面
         http://localhost:8080/#/search?categoryname=学习&category1Id=5
@@ -497,7 +497,7 @@ git pull origin master
             }
         },
 
-16 搜索模块中的三级联动与过度动画
+17 搜索模块中的三级联动与过度动画
 
     home组件中 TypeNav 显示
     search组件 TypeNav 默认隐藏
@@ -510,7 +510,7 @@ git pull origin master
         因此将发送请求放在 App.vue中 因为 App.vue 只会挂载一次
         this.$store.dispatch("reqCategoryList");
 
-17 参数合并
+18 参数合并
     http://localhost:8080/#/search/小米
     http://192.168.2.5:8080/#/search?categoryname=学习&category1Id=5
     params和query参数合并
@@ -525,9 +525,138 @@ git pull origin master
         }
         this.$router.push(location);
 
-18 mockjs模拟数据
+19 mockjs模拟数据
+
     1、安装
-    npm install mockjs
-    2、
-    
-    
+        npm install mockjs
+    2、使用
+     引入
+        import Mock from 'mockjs';
+     使用
+        //把JSON数据格式引入进来[JSON数据格式根本没有对外暴露，但是可以引入]
+        //webpack默认对外暴露的：图片、JSON数据格式
+        import banner from './banner.json';
+        import floor from './floor.json';
+
+        //mock数据:第一个参数请求地址   第二个参数：请求数据
+        Mock.mock("/mock/banner",{code:200,data:banner});//模拟首页大的轮播图的数据
+        Mock.mock("/mock/floor",{code:200,data:floor});
+
+        Mock.mock( rurl, template )
+        记录数据模板。当拦截到匹配 rurl 的 Ajax 请求时，将根据数据模板 template 生成模拟数据，并作为响应数据返回。
+
+        Mock.mock( rurl, function( options ) )
+        记录用于生成响应数据的函数。当拦截到匹配 rurl 的 Ajax 请求时，函数 function(options) 将被执行，并把执行结果作为响应数据返回。
+
+
+    mock banner轮播图数据
+    （1）在项目当中src中创建mock文件夹
+    （2）准备json格式数据 注意需要格式化
+    （3）把mock的数据需要的图片放在public文件中（public文件夹打包会将资源原封不动的打包到dist文件夹）
+    （4）创建 mockServer.js 通过mock插件实现模拟数据
+    （5）mockServer.js文件在入口文件中引入 至少执行一次
+
+        
+20 轮播图实现
+    1.准备vuex数据
+        mockAjax
+
+    2.swipper
+        教程
+            https://www.swiper.com.cn/usage/index.html
+        使用
+            1.引入
+            2.页面结构 必须有固定的样式
+            3.创建Swipper
+                import Swiper from 'swiper';    
+                var mySwiper =  new Swiper ('.swiper', {
+                    direction: 'vertical', // 垂直切换选项
+                    loop: true, // 循环模式选项
+                    
+                    //如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                    
+                    // 如果需要前进后退按钮
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    
+                    // 如果需要滚动条
+                    scrollbar: {
+                       el: '.swiper-scrollbar',
+                    },
+                ）
+
+    轮播图实现
+        1.安装
+            npm install swiper@5
+        2.引入 包 + 样式
+            样式 在 入口文件中引入
+
+
+        问题：
+          new Swiper() 放在mounted中不可以实现效果
+          因为 在mouted中 发送 异步请求 获取的数据，执行到 new Swiper()
+          此时数据还未获得 因此v-for渲染不完整、
+
+        解决方案
+            1.update
+            2.定时器
+            3.watch+nextTick （最终）
+
+        watch 监听数据变化
+            【】 -> 变为有数据
+            数据有了 但是此时无法保证 v-for页面结构是否完全渲染
+
+        Vue.nextTick( [callback, context] )
+        vm.$nextTick( [callback] )
+            在下次 DOM 更新 循环结束之后 执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。   
+
+            注意 该方法可以保证页面中的结构一定是完整的 经常和很多插件【需要dom已经存在了】一起使用
+
+
+        优化
+         避免使用id等选择器
+         使用ref
+            <div class="swiper-container" ref="mySwiper">
+            this.$nextTick(() => {
+               new Swiper(this.$refs.mySwiper, {})
+            })
+
+
+17 floor组件mock数据
+
+    floor组件复用  因此不能在内部发请求 遍历
+    发请求应该在其父组件中发送
+    才想起来：伏组件给自组件穿一个参数，根据参数不同组件内部发送不同的请求？
+
+    组件通信的方式
+        props 父->子组件传递值
+        自定义事件：@on @emit 子组件给父组件
+        全局事件总线 ：$bus 任意组件
+        pubsub.js 任意组件
+        插槽
+        vuex
+
+
+    优化
+        使用  v-for
+            <Floor></Floor>
+            <Floor></Floor>
+
+            <Footer v-show="$route.meta.showfooter"></Footer>
+
+    floor中的轮播图
+        直接在mounted中 
+            new Swiper(this.$ref.xxx,{
+
+            })
+        因为次数已经取到数据，html的dom渲染完毕了
+        因此可以在此时 使用插件
+
+
+
+        

@@ -16,7 +16,8 @@ export default {
     Header,
     Footer,
   },
-  mounted() {
+  beforeMount() {
+    console.log("reqCategoryList");
     this.$store.dispatch("reqCategoryList");
   },
 };

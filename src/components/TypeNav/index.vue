@@ -90,7 +90,6 @@ export default {
   },
   mounted() {
     // this.$store.dispatch("reqCategoryList");
-    console.log(this.$route.path);
     // if (this.$route.path == "/search") {
     if (this.$route.path.indexOf("/search" ) != -1) {
       this.show = false;
