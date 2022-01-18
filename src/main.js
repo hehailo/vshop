@@ -16,8 +16,10 @@ import 'swiper/css/swiper.css'
 //引入全局组件 三级联动
 import TypeNav from '@/components/TypeNav';
 import Carousel from '@/components/Carousel';
+import Pagination from '@/components/Pagination';
 Vue.component(TypeNav.name,TypeNav)
 Vue.component(Carousel.name,Carousel)
+Vue.component(Pagination.name,Pagination)
 
 
 Vue.config.productionTip = false;
