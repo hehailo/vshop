@@ -12,39 +12,54 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x">手机</li>
-            <li class="with-x">iphone<i>×</i></li>
-            <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li>
+            <!-- 分类的面包屑 -->
+            <li class="with-x" v-if="searchParams.categoryname">
+              {{ searchParams.categoryname
+              }}<i @click="removeCatoryName"> x </i>
+            </li>
+
+            <!-- 搜索关键字面包屑 -->
+            <li class="with-x" v-if="searchParams.keyword">
+              {{ searchParams.keyword }}
+              <i @click="removeKeyWord"> x </i>
+            </li>
+
+            <!-- 品牌的面包屑 -->
+            <li class="with-x" v-if="searchParams.trademark">
+              {{ searchParams.trademark.split(":")[1] }}
+              <i @click="removeTrademark"> x </i>
+            </li>
+
+            <!-- 属性的面包屑 -->
+            <!-- 72:功率:100W -->
+            <li
+              class="with-x"
+              v-for="(prop, index) in searchParams.props"
+              :key="index"
+            >
+              {{ prop.split(":")[1] }}
+              <i @click="removeAttr(index)"> x </i>
+            </li>
           </ul>
         </div>
 
         <!--selector 筛选条件-->
-        <SearchSelector />
+        <SearchSelector @tradeInfo="tradeInfo" @attrInfo="attrInfo" />
 
         <!--details 搜索结果-->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
-              <!-- 价格结构 -->
+              <!-- 排序结构 -->
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
-                </li>
-                <li>
-                  <a href="#">销量</a>
-                </li>
-                <li>
-                  <a href="#">新品</a>
-                </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li v-for="orderOption in orderOptions" :key="orderOption.id" :class="{ active: currentOrder == orderOption.id }">
+                  <a>
+                    {{ orderOption.name }}
+                    <span v-show="currentOrder == orderOption.id">
+                      <span class="icon iconfont"  @click="orderAsc(orderOption.id)"  v-show="sortOreder == 'asc'"  >&#xe66c;</span>
+                      <span class="icon iconfont" @click="orderDesc(orderOption.id)" v-show="sortOreder == 'desc'" >&#xe609;</span>
+                    </span>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -97,6 +112,7 @@
               </li>
             </ul>
           </div>
+
           <!-- 分页器 -->
           <div class="fr page">
             <div class="sui-pagination clearfix">
@@ -141,17 +157,21 @@ export default {
   name: "Search",
   data() {
     return {
+      orderOptions: [
+        { id: 1, name: "综合" },
+        { id: 2, name: "价格" },
+      ],
       searchParams: {
-        categoryname:'',
-        category1Id:'',
-        category2Id:'',
-        category3Id:'',
-        keyword:'',
-        order:'',
-        pageNo:1,
-        pageSize:3,
-        props:[],
-        trademark:'',
+        categoryname: "",
+        category1Id: "",
+        category2Id: "",
+        category3Id: "",
+        keyword: "",
+        order: "1:desc",
+        pageNo: 1,
+        pageSize: 6,
+        props: [],
+        trademark: "",
       },
     };
   },
@@ -162,16 +182,93 @@ export default {
     console.log("当前已进入搜索结果页面----");
   },
   beforeMount() {
-    Object.assign(this.searchParams, this.$route.query, this.$route.params);
-    console.log("searchParams",this.searchParams);
+    console.log("search组件的beforeMount");
+    // Object.assign(this.searchParams, this.$route.query, this.$route.params);
+    this.searchParams = {
+      ...this.searchParams,
+      ...this.$route.query,
+      ...this.$route.params,
+    };
     this.getData();
   },
   computed: {
+    currentOrder() {
+      return this.searchParams.order.split(":")[0];
+    },
+    sortOreder() {
+      return this.searchParams.order.split(":")[1];
+    },
     ...mapGetters(["goodsList"]),
   },
   methods: {
     getData() {
       this.$store.dispatch("getSearchList", this.searchParams);
+    },
+    // 移除目录的面包屑
+    removeCatoryName() {
+      // 这一步需要 因为要处理页面
+      this.searchParams.categoryname = undefined;
+      this.searchParams.category1Id = undefined;
+      this.searchParams.category2Id = undefined;
+      this.searchParams.category3Id = undefined;
+      this.$router.push({ name: "search", params: this.$route.params });
+    },
+    // 移除搜索关键字的 keyword
+    removeKeyWord() {
+      //处理页面
+      this.searchParams.keyword = undefined;
+      // 通知兄弟组件header清除搜索框关键字
+      this.$bus.$emit("clearKeyWord");
+      // 再次发送请求
+      this.$router.push({ name: "search", query: this.$route.query });
+    },
+    // 移除品牌面包屑
+    removeTrademark() {
+      this.searchParams.trademark = undefined;
+      this.getData();
+    },
+    // 点击品牌查询
+    tradeInfo(info) {
+      this.searchParams.trademark = info.tmId + ":" + info.tmName;
+      this.getData();
+    },
+    // 点击筛选属性查询
+    attrInfo(attr, attrVal) {
+      // attrId: 107
+      // attrName: "二级手机"
+      // attrValueList: ["小米", "华为", "苹果"]
+      let item = attr.attrId + ":" + attrVal + ":" + attr.attrName;
+      this.searchParams.props.push(item); //106:安卓手机:手机一级
+      this.getData();
+    },
+    // 移除属性面包屑
+    removeAttr(index) {
+      console.log(index);
+      // 影响页面
+      this.searchParams.props.splice(index, 1);
+      this.getData();
+    },
+    //"1:desc" 
+    orderAsc(orderid) {
+      this.searchParams.order = orderid + ":asc";
+      this.getData();
+      
+    },
+    orderDesc(orderid){
+       this.searchParams.order = orderid+":desc";
+       this.getData();
+    },
+  },
+  watch: {
+    // 监听路由 路由发生变化
+    $route() {
+      console.log("searchParams", this.searchParams);
+      this.searchParams = {
+        ...this.searchParams,
+        ...this.$route.query,
+        ...this.$route.params,
+      };
+      this.getData();
     },
   },
 };

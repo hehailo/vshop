@@ -746,3 +746,167 @@ git pull origin master
     不需要父组件传值
     从getters里面获取数据就可以了
 
+
+26 监听路由变化 再次发送请求获取数据
+
+    搜索区 点击搜索应该再次发送请求
+    监听路由变化
+    路由变化 则再次向服务器发送请求
+
+    问题？为啥监听$route 不需要深度监听
+
+    由于使用的是合并对象 因此吧三个含有id属性的参数清空,因为这三个id只需要一个就可以了
+
+
+    深度监听
+        watch: {
+            obj: {
+                handler(newName, oldName) { //特别注意，不能用箭头函数，箭头函数，this指向全局
+                console.log('obj.a changed');
+                },
+                immediate: true,  //刷新加载 立马触发一次handler
+                deep: true  // 可以深度检测到 obj 对象的属性值的变化
+            }
+        }
+    
+    解决方案
+        watch:{
+            // 监听路由 路由发生变化
+            $route(){
+            console.log("ddd");
+            this.searchParams = {...this.searchParams,...this.$route.query,...this.$route.params}
+            this.getData();
+            }
+        }
+
+
+27 面包屑处理
+    1.展示面包屑
+
+        分类目录
+            选中目录 展示面包屑 query参数添加
+
+        搜索关键字   
+            点击搜索 展示搜索字段
+
+    2.点击x  移除对应面包屑
+
+        1、移除目录面包屑
+            需要清空对应的目录名和目录id
+            优化：因为对应的参数字段可有可无
+                将值传为 undefined 就可以不传到后台
+
+            问题 地址栏路径没有变化？
+                解：路由跳转到自己身上！ 
+                router.push 把query参数去掉 params参数
+
+         2、移除 【搜索关键字】面包屑
+            1.清除页面展示
+            2.处理地址栏
+            3.清空搜索框
+                搜索框 是header 组件的内容
+
+            解决方案：
+                使用全局事件总线完成
+
+                1.配置全局事件总线 main.js
+                    new Vue({
+                        router,
+                        store,//多了一个¥store
+                        render: (h) => h(App),
+                        beforeCreate(){
+                            Vue.prototype.$bus = this;
+                        }
+                    })
+                2.通知兄弟组件header清除搜索框关键字
+                    this.$bus.$emit("clearKeyWord");
+                3.header组件挂载的时候 绑定回调
+                     mounted(){
+                        this.$bus.$on("clearKeyWord",()=>{
+                        this.keyWord = '';
+                        })
+                    },
+
+           解决的代码：
+                // 移除目录的面包屑
+                removeCatoryName() {
+                // 这一步需要 因为要处理页面
+                this.searchParams.categoryname = undefined;
+                this.searchParams.category1Id = undefined;
+                this.searchParams.category2Id = undefined;
+                this.searchParams.category3Id = undefined;
+                this.$router.push({ name: "search", params: this.$route.params });
+                },
+                // 移除搜索关键字的 keyword
+                removeKeyWord() {
+                //处理页面
+                this.searchParams.keyword = undefined;
+                // 通知兄弟组件header清除搜索框关键字
+                this.$bus.$emit("clearKeyWord");
+                // 再次发送请求
+                this.$router.push({ name: "search", query: this.$route.query });
+                },
+
+    3.处理面包屑 品牌信息
+        点击品牌 
+            面包屑展示品牌
+        点击x
+            清除面包屑品牌
+            改变传参
+            !! 不涉及路由的变化
+
+        问题
+            1.品牌在子组件中
+            2.需要发送请求 重新获取数据
+                在父组件中发请求更方便 searchParams在父组件search中
+
+
+        ！！自定义事件 解决
+        1.定义和绑定
+            <SearchSelector @tradeInfo="tradeInfo" />
+        2.触发  
+            this.$emit("tradeInfo",trademark)
+        3.处理事件
+            tradeInfo(info){
+
+            }
+
+        整理参数
+
+            this.searchParams.trademark = info.tmId + ":" + info.tmName;
+            this.getData();
+
+    4.处理面包屑 商品属性筛选
+
+       问题1 商品属性是一个数组
+            1、遍历展示
+            2、不能使用 v-show v-if
+                使用v-for
+        
+        问题2 重复问题
+            持续点击 可以有n个相同的面包屑
+            因此需要数组去重！
+                处理 添加的时候判断当前数组是否已经有这个元素
+            删除的时候 
+                数组删除对应元素
+                处理：根据数组下标 splice(index,1) 删除元素
+
+28 排序操作
+    需求 
+        按照 价格、销量... 进行排序
+
+        order "1:desc" 
+            1 代表综合 2代表价格
+            初始值 默认"1:desc"
+
+        1.点击排序选项
+            排序选项图标变亮 
+                通过order属性中的第一个值
+                用一个计算属性包裹 便于判断
+            排序项有箭头
+                谁有类名 谁有箭头
+                iconfont 制作箭头
+
+
+
+

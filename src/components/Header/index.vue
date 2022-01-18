@@ -61,12 +61,17 @@ export default {
       keyWord: "",
     };
   },
+  mounted(){
+    this.$bus.$on("clearKeyWord",()=>{
+      this.keyWord = '';
+    })
+  },
   methods: {
     goSearch() {
       // this.$router.push("/search/"+this.keyWord)
       let location = {
         name: "search",
-        params: { keyword: this.keyWord || undefined },
+        params: { keyword: this.keyWord || undefined},
       };
       if (this.$route.query) {
         location.query = this.$route.query;

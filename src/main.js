@@ -16,11 +16,8 @@ import 'swiper/css/swiper.css'
 //引入全局组件 三级联动
 import TypeNav from '@/components/TypeNav';
 import Carousel from '@/components/Carousel';
-
-
 Vue.component(TypeNav.name,TypeNav)
 Vue.component(Carousel.name,Carousel)
-
 
 
 Vue.config.productionTip = false;
@@ -30,4 +27,7 @@ new Vue({
   router,
   store,//多了一个¥store
   render: (h) => h(App),
+  beforeCreate(){
+    Vue.prototype.$bus = this;
+  }
 }).$mount("#app");
