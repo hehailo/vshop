@@ -52,12 +52,12 @@
             <div class="navbar-inner filter">
               <!-- 排序结构 -->
               <ul class="sui-nav">
-                <li v-for="orderOption in orderOptions" :key="orderOption.id" :class="{ active: currentOrder == orderOption.id }">
+                <li v-for="orderOption in orderOptions" :key="orderOption.id" :class="{ active: currentSeq == orderOption.id }">
                   <a>
                     {{ orderOption.name }}
-                    <span v-show="currentOrder == orderOption.id">
-                      <span class="icon iconfont"  @click="orderAsc(orderOption.id)"  v-show="sortOreder == 'asc'"  >&#xe66c;</span>
-                      <span class="icon iconfont" @click="orderDesc(orderOption.id)" v-show="sortOreder == 'desc'" >&#xe609;</span>
+                    <span v-show="currentSeq == orderOption.id">
+                      <span class="icon iconfont"  @click="changeOrder(orderOption.id)"  v-show="sortOreder == 'asc'"  >&#xe66c;</span>
+                      <span class="icon iconfont" @click="changeOrder(orderOption.id)" v-show="sortOreder == 'desc'" >&#xe609;</span>
                     </span>
                   </a>
                 </li>
@@ -192,7 +192,7 @@ export default {
     this.getData();
   },
   computed: {
-    currentOrder() {
+    currentSeq() {
       return this.searchParams.order.split(":")[0];
     },
     sortOreder() {
@@ -249,14 +249,17 @@ export default {
       this.getData();
     },
     //"1:desc" 
-    orderAsc(orderid) {
-      this.searchParams.order = orderid + ":asc";
+    // 点击之后 顺序变逆序
+    changeOrder(orderid) {
+      let temp = '';
+      if(this.sortOreder == 'asc'){
+        temp = 'desc'
+      }else{
+        temp = 'asc'
+      }
+      console.log(orderid);
+      this.searchParams.order = orderid + temp;
       this.getData();
-      
-    },
-    orderDesc(orderid){
-       this.searchParams.order = orderid+":desc";
-       this.getData();
     },
   },
   watch: {
