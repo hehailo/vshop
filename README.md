@@ -151,24 +151,24 @@ git pull origin master
 
 
 8. 重写push和replace方法
+
     编程式导航问题：
     跳转路由 多次传参重复 会抛出警告
     NavigationDuplicated: Avoided redundant navigation to current location
 
     push方法 有返回值 返回值是一个promise 
-    function push(){
-        return new Promise((resolve,reject)=>{
+        promise需要有失败或者成功的回调 
+        function push(){
+            return new Promise((resolve,reject)=>{
 
-        })
-    }
-    promise需要有失败或者成功的回调 
+            })
+        }
 
     this.$router是VueRouter的实例对象
     push方法是   VueRouter 原型上的方法 
     
-
-
     js原型
+    
         显式原型（属性）
         每个函数都有一个prototype属性，它默认指向一个Object空对象（即：原型对象）
         原型对象中有一个属性constructor，它指向函数对象
@@ -199,7 +199,8 @@ git pull origin master
         sum.apply(null,[1,2]);
 
 
-    解决方法        
+    解决方法
+
         let origiPush = VueRouter.prototype.push;
         let roriginReplace = VueRouter.prototype.replace;
 
