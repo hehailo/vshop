@@ -77,18 +77,16 @@
           <!-- 销售的产品列表 -->
           <div class="goods-list">
             <ul class="yui3-g">
-              <li
-                class="yui3-u-1-5"
-                v-for="good in goodsList"
-                :key="good.id"
-              >
+              <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
                   <div class="p-img">
                     <a @click="goDetail(good.id)">
-                      <img :src="
+                      <img
+                        :src="
                           good.defaultImg ||
                           'http://47.93.148.192:8080/group1/M00/00/02/rBHu8l-rgfWAbqkuAAENKBtJukQ551.jpg'
-                        "/>
+                        "
+                      />
                     </a>
                   </div>
                   <div class="price">
@@ -98,9 +96,7 @@
                     </strong>
                   </div>
                   <div class="attr">
-                    <a target="_blank" :title="good.title">{{
-                      good.title
-                    }}</a>
+                    <a target="_blank" :title="good.title">{{ good.title }}</a>
                   </div>
                   <div class="commit">
                     <i class="command">已有<span>2000</span>人评价</i>
@@ -262,10 +258,10 @@ export default {
       this.searchParams.pageNo = num;
       this.getData();
     },
-    goDetail(goodId){
-      console.log("/detail/"+goodId);
-      this.$router.push("/detail/"+goodId)
-    }
+    goDetail(goodId) {
+      console.log("/detail/" + goodId);
+      this.$router.push("/detail/" + goodId);
+    },
   },
   watch: {
     // 监听路由 路由发生变化
