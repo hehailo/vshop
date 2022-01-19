@@ -91,7 +91,7 @@ export default {
   mounted() {
     // this.$store.dispatch("reqCategoryList");
     // if (this.$route.path == "/search") {
-    if (this.$route.path.indexOf("/search" ) != -1) {
+    if (this.$route.path.indexOf("/search") != -1 || this.$route.path.indexOf("/detail") != -1) {
       this.show = false;
     }
   },
@@ -113,13 +113,13 @@ export default {
     leaveShow() {
       this.currentIndex = -1;
       // search隐藏目录
-      if (this.$route.path.indexOf("/search") != -1) {
+      if (this.$route.path.indexOf("/search") != -1 || this.$route.path.indexOf("/detail") != -1) {
         this.show = false;
       }
     },
     enterShow() {
       // search展示目录
-      if (this.$route.path.indexOf("/search") != -1) {
+      if (this.$route.path.indexOf("/search") != -1 || this.$route.path.indexOf("/detail") != -1) {
         // if (this.$route.path == "/search") {
         this.show = true;
       }
@@ -170,6 +170,7 @@ export default {
       color: #fff;
       font-size: 14px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .nav {
@@ -203,6 +204,7 @@ export default {
             margin: 0;
 
             a {
+              cursor: pointer;
               color: #333;
             }
           }

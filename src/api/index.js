@@ -17,6 +17,15 @@ export const reqSeachlist = (params) => {
 };
 
 
+// 产品详情
+export const reqProdDetail = (skuid) => {
+  return requests.get("/item/"+skuid)
+};
+
+
+
+// mock数据
+
 //首页轮播图
 export const reqBannerList = () => {
   return mockRequests.get("/banner");
@@ -26,4 +35,3 @@ export const reqBannerList = () => {
 export const reqFloorlist = () => {
     return mockRequests.get("/floor")
 };
-

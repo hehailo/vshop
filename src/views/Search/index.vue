@@ -79,18 +79,17 @@
             <ul class="yui3-g">
               <li
                 class="yui3-u-1-5"
-                v-for="(good, index) in goodsList"
-                :key="index"
+                v-for="good in goodsList"
+                :key="good.id"
               >
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
-                      ><img
-                        :src="
+                    <a @click="goDetail(good.id)">
+                      <img :src="
                           good.defaultImg ||
                           'http://47.93.148.192:8080/group1/M00/00/02/rBHu8l-rgfWAbqkuAAENKBtJukQ551.jpg'
-                        "
-                    /></a>
+                        "/>
+                    </a>
                   </div>
                   <div class="price">
                     <strong>
@@ -99,7 +98,7 @@
                     </strong>
                   </div>
                   <div class="attr">
-                    <a target="_blank" href="item.html" :title="good.title">{{
+                    <a target="_blank" :title="good.title">{{
                       good.title
                     }}</a>
                   </div>
@@ -123,7 +122,13 @@
           </div>
 
           <!-- 分页器 -->
-          <Pagination></Pagination>
+          <Pagination
+            :pageNo="searchParams.pageNo"
+            :pageSize="searchParams.pageSize"
+            :total="total"
+            :middleNum="5"
+            @getPageNum="getPageNum"
+          ></Pagination>
         </div>
       </div>
     </div>
@@ -131,7 +136,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import SearchSelector from "./SearchSelector/SearchSelector";
 
 export default {
@@ -179,6 +184,12 @@ export default {
     sortOreder() {
       return this.searchParams.order.split(":")[1];
     },
+    ...mapState({
+      total: (state) => {
+        //函数体
+        return state.search.searchlist.total;
+      },
+    }),
     ...mapGetters(["goodsList"]),
   },
   methods: {
@@ -244,9 +255,17 @@ export default {
         temp = "desc";
         this.searchParams.order = orderid + ":" + temp;
       }
-      console.log("this.searchParams.order",this.searchParams.order);
+      console.log("this.searchParams.order", this.searchParams.order);
       this.getData();
     },
+    getPageNum(num) {
+      this.searchParams.pageNo = num;
+      this.getData();
+    },
+    goDetail(goodId){
+      console.log("/detail/"+goodId);
+      this.$router.push("/detail/"+goodId)
+    }
   },
   watch: {
     // 监听路由 路由发生变化

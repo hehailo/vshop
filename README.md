@@ -919,4 +919,183 @@ git pull origin master
     分页组件 在项目中多处用到
     因此 设置为全局组件
 
+    自定义分页器
+        1.分页器数据
+            1 一共多少页面 total/pageNo  
+                向上取整 
+                    Math.ceil(5.1234);     // 6
+                向下取整 
+                    Math.floor(5.1234);    // 5     
+                    parseInt(5.1234);      // 5
+            2 当前是第几页 pageNo
+            3 每页展示多少条数据 pageSize
+            4 一共有多少条数据 total
+            5 连续的页码数  continue
+                1 2...7 8 9 10 11...
+
+    props接收三个参数
+    computed 计算分页数
+    算出去连续页码的起始数字和结束数字
+        pageNo-Math.floor(continue/2)
+        pageNo+Math.floor(continue/2)
+
+    当前为 第1页
+     1 2 3 4 5
+    当前为第2页
+     1 2 3 4 5
+
+     end页大于总页数  end = 总页数
+     start页小于1  start = 1
+
+     代码：
+        startNumAndEndNum() {
+            const { pageNo, totalPage, middleNum } = this;
+            let start =0,end = 0;
+            if (middleNum > totalPage) {
+                //  0 1 2 3
+                start = 1;
+                end = totalPage;
+            } else {
+                let spaceNum = parseInt(middleNum / 2);
+                start = pageNo - spaceNum;
+                end = pageNo + spaceNum;
+                if (start <= 0) {
+                start = 1;
+                end = middleNum;
+                } else if (end > totalPage) {
+                start = totalPage - middleNum + 1;
+                end = totalPage;
+                }
+            }
+            return { start, end };
+        },
+
+    上中下三个部分来处理
+
+        中间遍历 start end
+            <button v-for="(num,index) in startNumAndEndNum.end" :key="index" v-show="num >= startNumAndEndNum.start">{{num}}</button>
+        
+        上部分
+            1   start > 1 时候才需要展示
+            ... start = 1 或者2  的时候不展示 （start > 2）
+
+        结尾部分
+           totalPage  end == totalPage的时候不展示  （end < totalPage）
+           ... end == totalPage 或者 end == totalPage - 1 的时候不展示 （end < totalPage - 1）
+
+
+    父组件动态获取子组件传参
+
+        1.参数可以从父组件中获取
+        2.自定义事件
+            获取当前是第几页
+        3. 分页器点击事件
+            上一页
+                当前是第一页，上一页不可点击
+                getpage（当前页-1）
+            1
+                getpage（1）
+            中间按钮
+                getpage(num)
+            尾页
+                getpage(总页数)
+            下一页
+                当前是尾页，下一页不可点击
+                 getpage（当前页+1）
+
+
+30 产品详情
+   
+    1 静态组件
+    2 发请求
+    3 vuex
+    4 动态展示数据
+
+    详情页面-静态组件
+        1 还没有注册路由，路由配置
+
+        2 点击图片跳转路由
+            需要携带产品的id
+            /detail/:skuid
+
+        3 【滚动行为】问题：进入详情页面之后 进入到了页面底部
+            解决 v-router中的滚动行为
+
+            使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。
+             vue-router 能做到，而且更好，它让你可以自定义路由切换时页面如何滚动。
+            注意: 这个功能只在支持 history.pushState 的浏览器中可用。
+
+            scrollBehavior 方法接收 to 和 from 路由对象。第三个参数 savedPosition 当且仅当 popstate 导航 (通过浏览器的 前进/后退 按钮触发) 时才可用。
+            
+            //如果你要模拟“滚动到锚点”的行为：
+            const router = new VueRouter({
+                routes: [...],
+                scrollBehavior (to, from, savedPosition) {
+                    if (savedPosition) {
+                        return savedPosition
+                    } else {
+                        return { x: 0, y: 0 }
+                    }
+                    if (to.hash) {
+                        return {
+                        selector: to.hash
+                        }
+                    }
+                }
+            })
+
+
+        4 路由模块化
+            路由数组信息 放到新的文件里面 再暴露出来
+
+
+   发请求
+
+    定义请求
+    vuex
+        新建一个detail库
+        在vuex模块中配置
+
+        在vuex处理请求
+
+     动态展示数据
+        1 数据结构相对复杂
+            使用getters简化
+
+        2 问题prodInfo  初始化是一个空对象
+        因此不可以在getters里面直接返回他的下一层数据
+
+        解决 加一个 ||{}
+    
+
+
+31 放大镜 ZOOM
+
+
+     1 父组件给子组件传递数据
+        传的的数据是对象里面的 对象初始是一个空对象
+        导致传的是的数据undefined
+        因此需要处理 一层一层的处理
+
+        const getters = {   
+            skuInfo(state){
+                return state.productInfo.skuInfo || {}
+            },
+        }
+        computed: {
+            skuImageList(){
+            return this.skuInfo.skuImageList || [];
+            },
+        }
+        computed:{
+            imgObj(){
+            console.log("this.skuImageList",this.skuImageList);
+            return this.skuImageList[0] || {}
+            }
+        }
+
+
+
+        
+
 
