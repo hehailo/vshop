@@ -32,7 +32,7 @@ const getters = {
     return state.productInfo.skuInfo || {}
   },
   spuSaleAttrList(state){
-    return state.productInfo.spuSaleAttrList || {}
+    return state.productInfo.spuSaleAttrList || []
   }
 
 };

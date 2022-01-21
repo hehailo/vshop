@@ -1094,6 +1094,41 @@ git pull origin master
             }
         }
 
+    2 轮播图
+        1、展示轮播图
+            dom渲染完成之后 使用swiper
+            Vue.nextTick()
+
+                mounted: function () {
+                    this.$nextTick(function () {
+                        // Code that will run only after the
+                        // entire view has been rendered
+                    })
+                }
+
+            Vue.nextTick 的原理和用途：https://segmentfault.com/a/1190000012861862
+
+        2、点谁谁高亮
+
+        3、点小图展示大图
+
+32 展示商品可选项
+
+    1.从vuex中获取数据遍历展示
+    2.售卖属性排他操作
+        点谁 谁高亮
+
+        遍历中的对象是响应式的 改变它会引起vuex中数据的变化
+            changAttrtive(spuSaleAttrValue, spuSaleAttrValueList) {
+                console.log(spuSaleAttrValue);
+                // 先全部放置为0
+                spuSaleAttrValueList.forEach((item) => {
+                    item.isChecked = 0;
+                });
+                spuSaleAttrValue.isChecked = 1;
+            },
+
+
 
 
         

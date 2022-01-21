@@ -30,9 +30,9 @@
         <!-- 左侧放大镜区域 -->
         <div class="previewWrap">
           <!--放大镜效果-->
-          <Zoom :skuImageList="skuImageList"/>
+          <Zoom :skuImageList="skuImageList" />
           <!-- 小图列表 -->
-          <ImageList :skuImageList="skuImageList"/>
+          <ImageList :skuImageList="skuImageList" />
         </div>
 
         <!-- 右侧选择区域布局 -->
@@ -40,10 +40,10 @@
           <!-- 基本信息 -->
           <div class="goodsDetail">
             <h3 class="InfoName">
-              {{skuInfo.skuName}}
+              {{ skuInfo.skuName }}
             </h3>
             <p class="news">
-              {{skuInfo.skuDesc}}
+              {{ skuInfo.skuDesc }}
             </p>
             <div class="priceArea">
               <div class="priceArea1">
@@ -87,35 +87,29 @@
               </div>
             </div>
           </div>
+
           <!-- 产品选择 -->
           <div class="choose">
             <div class="chooseArea">
               <!-- 选择区域 -->
               <div class="choosed"></div>
               <!-- 属性区域 -->
-              <dl>
-                <dt class="title">选择颜色</dt>
-                <dd changepirce="0" class="active">金色</dd>
-                <dd changepirce="40">银色</dd>
-                <dd changepirce="90">黑色</dd>
-              </dl>
-              <dl>
-                <dt class="title">内存容量</dt>
-                <dd changepirce="0" class="active">16G</dd>
-                <dd changepirce="300">64G</dd>
-                <dd changepirce="900">128G</dd>
-                <dd changepirce="1300">256G</dd>
-              </dl>
-              <dl>
-                <dt class="title">选择版本</dt>
-                <dd changepirce="0" class="active">公开版</dd>
-                <dd changepirce="-1000">移动版</dd>
-              </dl>
-              <dl>
-                <dt class="title">购买方式</dt>
-                <dd changepirce="0" class="active">官方标配</dd>
-                <dd changepirce="-240">优惠移动版</dd>
-                <dd changepirce="-390">电信优惠版</dd>
+              <dl v-for="spuSaleAttr in spuSaleAttrList" :key="spuSaleAttr.id">
+                <dt class="title">{{ spuSaleAttr.saleAttrName }}</dt>
+                <dd
+                  changepirce="300"
+                  :class="{ active: spuSaleAttrValue.isChecked == 1 }"
+                  v-for="spuSaleAttrValue in spuSaleAttr.spuSaleAttrValueList"
+                  :key="spuSaleAttrValue.id"
+                  @click="
+                    changAttrtive(
+                      spuSaleAttrValue,
+                      spuSaleAttr.spuSaleAttrValueList
+                    )
+                  "
+                >
+                  {{ spuSaleAttrValue.saleAttrValueName }}
+                </dd>
               </dl>
             </div>
 
@@ -389,11 +383,24 @@ export default {
         return state.detail.productInfo.valuesSkuJson;
       },
     }),
-    skuImageList(){
-       return this.skuInfo.skuImageList || [];
+    skuImageList() {
+      return this.skuInfo.skuImageList || [];
     },
     ...mapGetters(["categoryView", "skuInfo", "spuSaleAttrList"]),
   },
+  methods: {
+    changAttrtive(spuSaleAttrValue, spuSaleAttrValueList) {
+      console.log(spuSaleAttrValue);
+      // 先全部放置为0
+      spuSaleAttrValueList.forEach((item) => {
+        item.isChecked = 0;
+      });
+      spuSaleAttrValue.isChecked = 1;
+    },
+  },
+  beforeUpdate(){
+    console.log("beforeUpdate");
+  }
 };
 </script>
 
