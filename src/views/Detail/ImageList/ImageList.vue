@@ -22,7 +22,7 @@ export default {
     },
   },
   watch: {
-    skuImageList(neVal, oldVal) {
+    skuImageList() {
       // nextTick()
       this.$nextTick(() => {
         new Swiper(this.$refs.detailImgSwiper, {

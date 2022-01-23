@@ -1,11 +1,11 @@
 <template>
   <div class="spec-preview">
     <img :src="imgObj.imgUrl" />
-    <div class="event"></div>
+    <div class="event" @mousemove="zoomPicture"></div>
     <div class="big">
-      <img :src="imgObj.imgUrl" />
+      <img :src="imgObj.imgUrl" ref="bigImg" />
     </div>
-    <div class="mask"></div>
+    <div class="mask" ref="imgMask"></div>
   </div>
 </template>
 
@@ -13,11 +13,10 @@
 export default {
   name: "Zoom",
   props: ["skuImageList"],
-  data(){
+  data() {
     return {
-       currentIndex:0
-    }
-   
+      currentIndex: 0,
+    };
   },
   computed: {
     imgObj() {
@@ -25,12 +24,44 @@ export default {
       return this.skuImageList[this.currentIndex] || {};
     },
   },
-  mounted(){
-    this.$bus.$on("changeZoomImage",(index)=>{
-      console.log("index",index);
+  mounted() {
+    this.$bus.$on("changeZoomImage", (index) => {
+      console.log("index", index);
       this.currentIndex = index;
     });
-  }
+  },
+  methods: {
+    zoomPicture(event) {
+      //计算出遮罩层的位置
+      let mask = this.$refs.imgMask;
+      let bigImg = this.$refs.bigImg;
+      let left = event.offsetX - mask.offsetWidth / 2;
+      let top = event.offsetY - mask.offsetHeight / 2;
+      if (left <= 0) {
+        left = 0;
+      }
+      if (left >= mask.offsetWidth) {
+        left = mask.offsetWidth;
+      }
+      if (top <= 0) {
+        top = 0;
+      }
+      if (top >= mask.offsetHeight) {
+        top = mask.offsetHeight;
+      }
+      // 距离限制
+      mask.style.top = top + "px";
+      mask.style.left = left + "px";
+
+      //大图片相对于父元素的距离
+      //控制大图片的内容
+      // 大图片是小图片放大两倍的结果
+      // 大图片实现原理是  把图片移动到展示的区域内部
+      // 鼠标左移  图片右移；鼠标右移  图片左移;图片移动的距离是鼠标移动的两倍
+      bigImg.style.left = -left * 2 + "px";
+      bigImg.style.top = -top * 2 + "px";
+    },
+  },
 };
 </script>
 
