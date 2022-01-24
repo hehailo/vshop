@@ -116,12 +116,19 @@
             <!-- 购物车区域 -->
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt" />
-                <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <input
+                  autocomplete="off"
+                  class="itxt"
+                  v-model="skuNum"
+                  @change="getInputSkuNum"
+                />
+                <a class="plus" @click="skuNum++">+</a>
+                <a class="mins" @click="skuNum > 1 ? skuNum-- : (skuNum = 1)"
+                  >-</a
+                >
               </div>
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <a @click="addShopCart">加入购物车</a>
               </div>
             </div>
           </div>
@@ -366,7 +373,11 @@ import Zoom from "./Zoom/Zoom";
 
 export default {
   name: "Detail",
-
+  data() {
+    return {
+      skuNum: 1,
+    };
+  },
   components: {
     ImageList,
     Zoom,
@@ -397,10 +408,34 @@ export default {
       });
       spuSaleAttrValue.isChecked = 1;
     },
+    getInputSkuNum() {
+      let value = event.target.value * 1;
+      if (isNaN(value) || value < 1) {
+        this.skuNum = 1;
+      } else {
+        this.skuNum = parseInt(value);
+      }
+    },
+    showAlert() {
+      console.log(event.target);
+    },
+    async addShopCart() {
+      // 1 发请求存库
+      let params = {
+        skuId: this.$route.params.skuid,
+        skuNum:this.skuNum
+      };
+      try {
+        await this.$store.dispatch("addOrUpdateShopCart", params);
+        // 2 路由跳转
+        // 商品信息使用会话存储
+        sessionStorage.setItem("SKUINFO",JSON.stringify(this.skuInfo))
+        this.$router.push({name:'addcartsuccess',query:{skuNum:this.skuNum}})
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
   },
-  beforeUpdate(){
-    console.log("beforeUpdate");
-  }
 };
 </script>
 
@@ -594,6 +629,7 @@ export default {
                 position: absolute;
                 right: -8px;
                 border: 1px solid #ccc;
+                cursor: pointer;
               }
 
               .mins {

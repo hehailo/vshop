@@ -1,6 +1,6 @@
 //home
 
-import { reqProdDetail } from "@/api";
+import { reqProdDetail, reqAddOrUpdateShopCart } from "@/api";
 const state = {
   productInfo: {},
 };
@@ -16,6 +16,18 @@ const actions = {
       context.commit("PRDOINFO", result.data);
     }
   },
+
+  async addOrUpdateShopCart({ commit }, { skuId, skuNum }) {
+    let result = await reqAddOrUpdateShopCart(skuId, skuNum);
+    // result 不是promise 需要重新封装
+    console.log("加入购物车请求", result);
+    if (result.code >= 200 && result.code < 300 ) {
+      return "ok";
+    } else {
+      // return Promise.reject("fail")
+      return Promise.reject(new Error("添加购物车失败！"));
+    }
+  },
 };
 
 // categoryView:Object
@@ -25,16 +37,15 @@ const actions = {
 // valuesSkuJson:"
 
 const getters = {
-  categoryView(state){
-    return state.productInfo.categoryView || {}
+  categoryView(state) {
+    return state.productInfo.categoryView || {};
   },
-  skuInfo(state){
-    return state.productInfo.skuInfo || {}
+  skuInfo(state) {
+    return state.productInfo.skuInfo || {};
   },
-  spuSaleAttrList(state){
-    return state.productInfo.spuSaleAttrList || []
-  }
-
+  spuSaleAttrList(state) {
+    return state.productInfo.spuSaleAttrList || [];
+  },
 };
 
 export default {

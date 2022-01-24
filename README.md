@@ -1115,6 +1115,12 @@ git pull origin master
     3 放大镜效果
         1 蒙板跟着鼠标动
             获取蒙版的dom
+            蒙版的左上边距 = 鼠标相对父元素移动的左上边距-1/2蒙板本身的宽高
+        2 大图片的放大效果        
+            大图片实现原理是  
+                大图片是小图片放大两倍的结果
+                把图片移动到展示的区域内部。图片移动的距离是鼠标移动的两倍，且方向相反
+                鼠标左移  图片右移；鼠标右移  图片左移;
             
 
 32 展示商品可选项
@@ -1135,7 +1141,90 @@ git pull origin master
 
 
 
+33 购买产品个数的操作
 
+
+    非法输入
+        带有【非数字字符】的字符串*1 = NaN
+
+        NaN判断 取1
+            由于 NaN 是唯一一个不等于自身的值，不像其他的值，可以用相等操作符来判断是否等于自身，NaN == NaN和 NaN === NaN都会返回false，所以isNaN()就诞生了
+            isNaN(num)
+
+            https://www.cnblogs.com/moqijianqi/p/11413441.html
+        小于1 取1
+        小数  取整
+
+34 加入购物车成功
+
+    点击加入购物车
+        1、发请求
+        2、跳转页面
+    
+
+    加入购物车请求
+        1 发请求
+            返回结果无信息 不用存store
+            /api/cart/addToCart/{ skuId }/{ skuNum }
+
+        2、本次请求加入购物车成功与失败的结果
+            async 修饰的函数返回的是一个 promise
+            this.$store.dispatch("addOrUpdateShopCart",params) 返回的是一个promise
+
+            let result = await reqAddOrUpdateShopCart(skuId,skuNum);
+            result 不是promise 需要重新封装
+
+                async addOrUpdateShopCart({commit},{skuId,skuNum}){
+                    let result = await reqAddOrUpdateShopCart(skuId,skuNum);
+                    console.log("加入购物车请求",result);
+                    if(result.code == 200){
+                        return 'ok'
+                    }else{
+                        return Promise.reject(new Error("添加购物车失败！"))
+                    }
+                }
+
+                async addShopCart() {
+                    // 1 发请求存库
+                    let params = {
+                        skuId: this.$route.params.skuid,
+                        skuNum:this.skuNum
+                    };
+                    try {
+                        await this.$store.dispatch("addOrUpdateShopCart", params);
+                    } catch (error) {
+                    }
+                },
+
+        3 路由传递参数结合会话存储
+
+            skuNum使用路由传参
+
+            商品信息结构相对复杂
+                 使用sessionStorage存储
+                只能存字符串 不能存对象
+
+    查看商品详情
+        1、点击返回商品详情页
+
+    
+
+35 购物车部分
+
+    跳转到购物车页面    
+        路由配置
+
+    静态组件
+        样式调整
+
+    获取购物车数据
+        向服务器发送数据 vux操作三连环（api dispatch action mutation）
         
+        需要身份鉴别 获取对应的购物车
+            uuid游客身份获取购物车数据
+            uuid已经引入 不需要安装
+
+            可以提供请求头携带参数
+            uuid已经生成 就不需要在改变 loaclStorage缓存
 
 

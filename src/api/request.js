@@ -1,8 +1,10 @@
 //对axios进行二次封装
+import store from "@/store";
 import axios from "axios";
 import nprogress from 'nprogress';
 //引入进度条样式
 import 'nprogress/nprogress.css'
+// 当前模块中引入store
 
 //request 就是 xios
 const requests = axios.create({
@@ -17,10 +19,14 @@ requests.interceptors.request.use(
   (config) => {
     nprogress.start();
     console.log('请求拦截',config.url);
+    let uuid_token =store.state.shopcart.uuid_token
+    if(uuid_token){
+      config.headers.userTempId = uuid_token;
+    }
     return config;
   },
   (error) => {
-    return new Promise.reject(error);
+    return  Promise.reject(error);
   }
 );
 
@@ -33,7 +39,7 @@ requests.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    return new Promise.reject(error);
+    return  Promise.reject(error);
   }
 );
 

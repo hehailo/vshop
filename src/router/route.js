@@ -3,7 +3,9 @@ import Home from "@/views/Home";
 import Search from "@/views/Search";
 import Register from "@/views/Register";
 import Login from "@/views/Login";
-import Detail from '@/views/Detail'
+import Detail from "@/views/Detail";
+import AddCartSuccess from "@/views/AddCartSuccess";
+import ShopCart from "@/views/ShopCart";
 
 //路由配置信息
 export default [
@@ -64,4 +66,23 @@ export default [
       showfooter: true,
     },
   },
+  // 添加购物车成功
+  {
+    path: "/addcartsuccess",
+    name: "addcartsuccess",
+    component: AddCartSuccess,
+    meta: {
+      showfooter: true,
+    },
+  },
+  // 购物车
+  {
+    path: "/shopCart",
+    name: "shopCart",
+    component: ShopCart,
+    meta: {
+      showfooter: true,
+    },
+  },
+
 ];

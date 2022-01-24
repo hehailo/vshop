@@ -23,8 +23,19 @@ export const reqProdDetail = (skuid) => {
 };
 
 
+// 加入购物车
+export const reqAddOrUpdateShopCart = (skuId,skuNum) => {
+  // /api/cart/addToCart/{ skuId }/{ skuNum }
+  return requests.post("/cart/addToCart/"+skuId +'/'+skuNum)
+};
 
-// mock数据
+
+// 获取购物车列表
+export const reqCartList = ()=>{
+  //函数体
+  // return requests.get("/cart/cartlist")
+  return mockRequests.get("/cart/cartlist")
+}
 
 //首页轮播图
 export const reqBannerList = () => {
