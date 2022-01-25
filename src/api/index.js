@@ -33,8 +33,8 @@ export const reqAddOrUpdateShopCart = (skuId,skuNum) => {
 // 获取购物车列表
 export const reqCartList = ()=>{
   //函数体
-  // return requests.get("/cart/cartlist")
-  return mockRequests.get("/cart/cartlist")
+  return requests.get("/cart/cartList")
+  // return mockRequests.get("/cart/cartlist")
 }
 
 //首页轮播图
@@ -46,3 +46,17 @@ export const reqBannerList = () => {
 export const reqFloorlist = () => {
     return mockRequests.get("/floor")
 };
+
+
+// 删除某一商品
+export const reqDeleteCartById = (skuId) => {
+  // /api/cart/addToCart/{ skuId }/{ skuNum }
+  return requests.delete("/cart/deleteCart/"+skuId)
+};
+
+// 修改商品的选中状态
+export const reqUpdateCheckedById = (skuId,ischecked) => {
+  // /api/cart/addToCart/{ skuId }/{ skuNum }
+  return requests.get("/cart/checkCart/"+skuId+'/'+ischecked);
+};
+

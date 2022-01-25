@@ -18,6 +18,7 @@ const actions = {
   },
 
   async addOrUpdateShopCart({ commit }, { skuId, skuNum }) {
+    console.log(new Date().getTime());
     let result = await reqAddOrUpdateShopCart(skuId, skuNum);
     // result 不是promise 需要重新封装
     console.log("加入购物车请求", result);

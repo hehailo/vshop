@@ -1228,3 +1228,18 @@ git pull origin master
             uuid已经生成 就不需要在改变 loaclStorage缓存
 
 
+36 修改商品数量 删除商品
+    vuex三件套
+    删除商品
+        删除不返回数据 只需要知道是成功还是失败
+            请求成功  async返回的就是一个promise
+            请求失败  新定义一个失败的promise返回
+
+
+    修改商品数量
+        防止点击过快 需要节流
+        lodash throttle
+
+37 批量删除商品
+    没有批量删除的接口
+    只能前端循环 调用单个删除接口

@@ -1,0 +1,680 @@
+{
+    "valuesSkuJson": "{}",
+    "price": 1,
+    "categoryView": {
+        "id": 61,
+        "category1Id": 2,
+        "category1Name": "手机",
+        "category2Id": 13,
+        "category2Name": "手机通讯",
+        "category3Id": 61,
+        "category3Name": "手机"
+    },
+    "spuSaleAttrList": [],
+    "skuInfo": {
+        "id": 2359,
+        "spuId": 3118,
+        "price": 1,
+        "skuName": "瓦灰姑娘这",
+        "skuDesc": "发顺丰",
+        "weight": "1.00",
+        "tmId": 4,
+        "category3Id": 61,
+        "skuDefaultImg": "http://47.93.148.192:8080/group1/M00/03/BE/rBHu8mHf8QWAdiJrAABMrmAQtSI176.jpg",
+        "isSale": 0,
+        "createTime": "2022-01-13 20:03:04",
+        "skuImageList": [
+            {
+                "id": 2927,
+                "skuId": 2359,
+                "imgName": "4804c846302442d28045545e7edcafe4!400x400.jpg",
+                "imgUrl": "http://47.93.148.192:8080/group1/M00/03/BE/rBHu8mHf8QWAdiJrAABMrmAQtSI176.jpg",
+                "spuImgId": 8437,
+                "isDefault": "1"
+            }
+        ],
+        "skuAttrValueList": [
+            {
+                "id": 5499,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5500,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5501,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5502,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5503,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5504,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5505,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5506,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5507,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5508,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5509,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5510,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5511,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5512,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5513,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5514,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5515,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5516,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5517,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5518,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5519,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5520,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5521,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5522,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5523,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5524,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5525,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5526,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5527,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5528,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5529,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5530,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5531,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5532,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5533,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5534,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5535,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5536,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5537,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5538,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5539,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5540,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5541,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5542,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5543,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5544,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5545,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5546,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5547,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5548,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5549,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5550,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5551,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5552,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5553,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5554,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5555,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5556,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5557,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5558,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5559,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5560,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5561,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5562,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5563,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5564,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5565,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5566,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5567,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5568,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5569,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5570,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5571,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5572,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5573,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5574,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5575,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5576,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            },
+            {
+                "id": 5577,
+                "attrId": 107,
+                "valueId": 177,
+                "skuId": 2359,
+                "attrName": "二级手机",
+                "valueName": "小米"
+            },
+            {
+                "id": 5578,
+                "attrId": 111,
+                "valueId": 181,
+                "skuId": 2359,
+                "attrName": "CPU型号",
+                "valueName": "骁龙730G"
+            }
+        ],
+        "skuSaleAttrValueList": []
+    }
+}

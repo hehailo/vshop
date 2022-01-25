@@ -39,7 +39,8 @@ requests.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    return  Promise.reject(error);
+    console.log("err日志：");
+    return Promise.reject(error);
   }
 );
 

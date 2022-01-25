@@ -1,0 +1,297 @@
+{
+    "trademarkList": [
+        {
+            "tmId": 4,
+            "tmName": "尚硅谷"
+        },
+        {
+            "tmId": 1,
+            "tmName": "小米"
+        },
+        {
+            "tmId": 6,
+            "tmName": "VIVO"
+        },
+        {
+            "tmId": 2,
+            "tmName": "苹果"
+        },
+        {
+            "tmId": 3,
+            "tmName": "华为"
+        },
+        {
+            "tmId": 29025,
+            "tmName": "魅族"
+        }
+    ],
+    "attrsList": [
+        {
+            "attrId": 111,
+            "attrValueList": [
+                "骁龙730G",
+                "骁龙845",
+                "麒麟990",
+                "骁龙439"
+            ],
+            "attrName": "CPU型号"
+        },
+        {
+            "attrId": 106,
+            "attrValueList": [
+                "安卓手机",
+                "苹果手机"
+            ],
+            "attrName": "手机一级"
+        },
+        {
+            "attrId": 11056,
+            "attrValueList": [
+                "12"
+            ],
+            "attrName": "phone111"
+        },
+        {
+            "attrId": 107,
+            "attrValueList": [
+                "小米",
+                "华为",
+                "苹果"
+            ],
+            "attrName": "二级手机"
+        },
+        {
+            "attrId": 11055,
+            "attrValueList": [
+                "33333"
+            ],
+            "attrName": "2222"
+        },
+        {
+            "attrId": 24,
+            "attrValueList": [
+                "128G",
+                "1T",
+                "256G",
+                "512G",
+                "32G",
+                "64G"
+            ],
+            "attrName": "机身内存"
+        },
+        {
+            "attrId": 23,
+            "attrValueList": [
+                "8G",
+                "4G",
+                "3G",
+                "256G",
+                "6G",
+                "12G",
+                "128G"
+            ],
+            "attrName": "运行内存"
+        },
+        {
+            "attrId": 112,
+            "attrValueList": [
+                "6.85-6.94英寸",
+                "6.55-6.64英寸",
+                "6.0-6.24英寸",
+                "6.95英寸及以上",
+                "6.65-6.74英寸"
+            ],
+            "attrName": "屏幕尺寸"
+        },
+        {
+            "attrId": 11036,
+            "attrValueList": [
+                "222"
+            ],
+            "attrName": "test111~~~"
+        },
+        {
+            "attrId": 10455,
+            "attrValueList": [
+                "hjh"
+            ],
+            "attrName": "哈哈"
+        }
+    ],
+    "goodsList": [
+        {
+            "id": 2334,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/03/BE/rBHu8mHf8QWAdiJrAABMrmAQtSI176.jpg",
+            "title": "瓦灰姑娘这",
+            "price": 1.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 2359,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/03/BE/rBHu8mHf8QWAdiJrAABMrmAQtSI176.jpg",
+            "title": "瓦灰姑娘这",
+            "price": 1.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 2062,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/00/02/rBHu8l-rgJqAMq2nAAGtjwY17fA932.jpg",
+            "title": "1w",
+            "price": 122.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 2826,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/02/DA/rBHu8mGxPb-AQOTXAAAWgQNuXx0990.jpg",
+            "title": "666",
+            "price": 4.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 2324,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/03/BE/rBHu8mHf8QWAdiJrAABMrmAQtSI176.jpg",
+            "title": "瓦灰姑娘这",
+            "price": 1.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 871,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/02/DA/rBHu8mGxPb-AQOTXAAAWgQNuXx0990.jpg",
+            "title": "123",
+            "price": 123.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 18,
+            "defaultImg": null,
+            "title": "vivo S10 Pro 5G手机 12GB+256GB 绮光焕彩 后置一亿像素 自然柔光人像 光致变色工艺 6nm旗舰芯片",
+            "price": 2323.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 2331,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/03/BE/rBHu8mHf8QWAdiJrAABMrmAQtSI176.jpg",
+            "title": "瓦灰姑娘这",
+            "price": 1.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 2378,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/03/BE/rBHu8mHf8QWAdiJrAABMrmAQtSI176.jpg",
+            "title": "瓦灰姑娘这",
+            "price": 1.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        },
+        {
+            "id": 1841,
+            "defaultImg": "http://47.93.148.192:8080/group1/M00/03/A2/rBHu8mHdE3CAWUbAAADF6L3iv_w110.jpg",
+            "title": "1",
+            "price": 1.0,
+            "createTime": null,
+            "tmId": null,
+            "tmName": null,
+            "category1Id": null,
+            "category1Name": null,
+            "category2Id": null,
+            "category2Name": null,
+            "category3Id": null,
+            "category3Name": null,
+            "hotScore": 0,
+            "attrs": null
+        }
+    ],
+    "total": 351,
+    "pageSize": 10,
+    "pageNo": 1,
+    "totalPages": 36
+}
