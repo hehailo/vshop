@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+
 # vshop
 
 ## Project setup
@@ -101,7 +102,7 @@ git pull origin master
     路由式
 
     push/replace 前者有当次历史记录 后者没有
-
+    
     query
     params 需要在路由配置里面
         1.占位
@@ -113,24 +114,24 @@ git pull origin master
         1:路由传递参数（对象写法）path是否可以结合params参数一起使用?
             不可以：不能这样书写，程序会崩掉；
             路由传递参数的时候对象的写法可以是path也可以是name，但是传递params参数的时候不能使用path
-
+    
         2:如何指定params参数可传可不传? 
             配置路由的时候，`params`参数已经占位了，但是路由挑战的时候不传递，路径会出现问题
             不传：http://localhost:8080/#/
             正常：http://localhost:8080/#/search/%E5%B0%8F%E7%B1%B3
-
+    
             解决方法
                 在配置路由的时候在params占位后面加上一个？
                  path:'/search/:keyword?',
-
+    
         3:params参数可以传递也可以不传递，但是如果传递是空串，如何解决？
             如果指定name与params配置, 但params中数据是一个"", 无法跳转，路径会出问题
             空串的问题 路径缺少
             http://localhost:8080/#/
-
+    
             解决方法，params传参的时候默认undefined
             this.$router.push({name:'search',params:{keyword:this.keyWord||undefined}})
-
+    
         4: 路由组件能不能传递props数据?
         可以 有三种方式
         1.布尔值
@@ -174,16 +175,16 @@ git pull origin master
         原型对象中有一个属性constructor，它指向函数对象
         给原型对象添加属性（一般都是方法）
         作用：函数的所有实例对象自动拥有原型中的属性（方法）
-
+        
         隐私原型（属性）__proto__
         每个实例对象都有一个proto，可称为隐私原型（属性）
         对象的隐式原型的值 等于 其对应构造函数的显式原型的值
-  
+        
         总结：
         函数的prototype属性：在定义函数时自动添加的，默认值是一个空object对象
         对象的 __proto__ 属性：创建对象时自动添加的，默认值为构造函数的prototype属性值
         程序员能直接操作显式原型，但不能直接操作隐式原型（ES6之前）
-
+        
         原型链：
         它是一种基于__proto__向上查找的机制，当我们操作实例的某个属性或者方法的时候，首先找到自己空间中私有的属性或者方法
         1.找到了，则结束查找，使用自己的私有即可
@@ -192,7 +193,7 @@ git pull origin master
 
 
     call 和 apply 的区别
-
+    
         call和apply都可以改变this的值思想
         不同点 call和apply传递参数 call传递参数用逗号隔开 apply方法执行 传递数组
         sum.call(null,1,2);
@@ -200,10 +201,10 @@ git pull origin master
 
 
     解决方法
-
+    
         let origiPush = VueRouter.prototype.push;
         let roriginReplace = VueRouter.prototype.replace;
-
+    
         //重写push和replace方法
         VueRouter.prototype.push = function(location,resolve,reject){
             if(resolve && reject){
@@ -212,7 +213,7 @@ git pull origin master
                 origiPush.call(this,location,()=>{},(error)=>{console.log(error)})
             }
         }
-
+    
         VueRouter.prototype.push = function(location,resolve,reject){
             if(resolve && reject){
                 roriginReplace.call(this,location,resolve,reject)
@@ -234,14 +235,14 @@ git pull origin master
 
     接口前缀都有 /api
     XMlHttpRequest fetch jquery axios
-
+    
     请求拦截器
     响应拦截器
 
 
     安装
         npm install axios
-
+    
     axios使用
         添加请求拦截器
             axios.interceptors.request.use(function (config) {
@@ -251,7 +252,7 @@ git pull origin master
                 // 对请求错误做些什么
                 return Promise.reject(error);
             });
-
+    
         添加响应拦截器
             axios.interceptors.response.use(function (response) {
                 // 对响应数据做点什么
@@ -260,15 +261,15 @@ git pull origin master
                 // 对响应错误做点什么
                 return Promise.reject(error);
             });
-
+    
         如果你想在稍后移除拦截器，可以这样：
             var myInterceptor = axios.interceptors.request.use(function () {/*...*/});
             axios.interceptors.request.eject(myInterceptor);
-
+    
         可以为自定义 axios 实例添加拦截器
             var instance = axios.create();
             instance.interceptors.request.use(function () {/*...*/});
-
+    
         执行 GET 请求
             // 为给定 ID 的 user 创建请求
             axios.get('/user?ID=12345')
@@ -278,7 +279,7 @@ git pull origin master
             .catch(function (error) {
                 console.log(error);
             });
-
+    
             // 可选地，上面的请求可以这样做
             axios.get('/user', {
                 params: {
@@ -292,7 +293,7 @@ git pull origin master
                 console.log(error);
             });
             执行 POST 请求
-
+    
             axios.post('/user', {
                 firstName: 'Fred',
                 lastName: 'Flintstone'
@@ -315,13 +316,13 @@ git pull origin master
     
     解决方案
         jsonp cros 代理
-
+    
     webpack
          https://v4.webpack.docschina.org/configuration/dev-server/#devserver
-
+    
         请求到 /api/users 现在会被代理到请求 http://localhost:3000/api/users。
         如果你不想始终传递 /api ，则需要重写路径：
-
+    
         module.exports = {
             //...
             devServer: {
@@ -333,18 +334,18 @@ git pull origin master
                 }
             }
         };
-
+    
         配置文件修改需要重新启动项目！
 
 
 12  nprogress进度条的使用
      
      npm install nprogress
-
+    
      在请求拦截器中使用
      start 进度条开始
      done 进度条结束
-
+    
     import nprogress from 'nprogress';
     //引入进度条样式
     import 'nprogress/nprogress.css'
@@ -357,12 +358,12 @@ git pull origin master
     state
     module
     getters
-
+    
     模块化
         inndex
             import home from "./home";
             import search from "./search";
-
+    
             export default new Vuex.Store({
             modules: {
                 home,
@@ -375,19 +376,19 @@ git pull origin master
             const mutations = {};
             const actions = {};
             const getters = {};
-
+    
             export default {
                 state,
                 mutations,
                 actions,
                 getters,
             };
- 
+
 
  14 typenav 三级联动 动态
 
     数据展示
-
+    
         "data": [
             {
                 "categoryChild": [
@@ -406,14 +407,14 @@ git pull origin master
                 "categoryId": 1
             },
         ]
-
+    
     动态添加背景颜色
         1.样式完成
             hover
         2.js完成
             鼠标移入 分类变色 
             :class="{ cur: currentIndex == index }"
-
+    
     二三级分类显示和隐藏
         1.样式完成
             一开始默认隐藏 hover时候 display block
@@ -422,7 +423,7 @@ git pull origin master
                 display: block;
                 }
              }
-
+    
         2.js完成
           <div class="item-list clearfix" :style="{display:currentIndex == index?'block':'none'}">
 
@@ -430,21 +431,21 @@ git pull origin master
     鼠标快速下滑 触发事件频繁 浏览器反应不过来 只有部分执行
 
     防抖和截流
-
+    
     防抖：
         前面所有的触发都取消 最后一次执行后，过去规定的时间之后才会触发，也就是说，如果连续快速的触发 只会执行一次
     节约流
         在规定的间隔时间范围内不会重复触发回调，只有大于这个时间间隔才会触发回调，把频繁触发变为少量触发
-
+    
     自己的理解
         防抖：最后一次触发事件回调后 一段时间内不在触发 则执行回调
         节流：一段时间内，事件回调只执行一次
-
+    
     使用lodash
         不用下载安装 但需要引入
         _debounce 防抖
         _throttle 截流
-
+    
     三级联动截流的操作
         changeIndex: throttle(function (index) {
         this.currentIndex = index;
@@ -457,17 +458,17 @@ git pull origin master
         http://localhost:8080/#/search?categoryname=学习&category1Id=5
         http://localhost:8080/#/search?categoryname=学习&category3Id=1
         http://localhost:8080/#/search?categoryname=学习&category3Id=63
-
+    
     路由跳转
     声明式  router-link
     编程式  push/replace
-
+    
     声明式
         1、可以实现
         2、router-link 是一个（路由内置的）组件
             当服务器数据返回之后，循环出大量（1000+）router-link组件（创建组件实例） 
             非常耗内存 会出现卡顿
-
+    
     编程式：
         1、可以实现
         2、循环中，进行逐渐一绑定，会绑定大量回调
@@ -476,7 +477,7 @@ git pull origin master
                 怎么保证点击的一定是a标签
                 如何获取参数
                 如何确定是二级分类/三级分类
-
+    
     解决方案：编程式+事件委派+自定义属性
         goSearch(event) {
             let element = event.target;
@@ -503,11 +504,11 @@ git pull origin master
     home组件中 TypeNav 显示
     search组件 TypeNav 默认隐藏
        划上去 显示 + 动画
-
+    
     优化
         在home组件、search组件中都有TypeNav组件
         TypeNav组件每次挂载都会发送请求 获取数据 重复发送请求
-
+    
         因此将发送请求放在 App.vue中 因为 App.vue 只会挂载一次
         this.$store.dispatch("reqCategoryList");
 
@@ -519,7 +520,7 @@ git pull origin master
     
 
     核心： this.$route代表的就是当前地址栏
-
+    
     实现
         if (this.$route.query) {
             location.query = this.$route.query;
@@ -538,14 +539,14 @@ git pull origin master
         //webpack默认对外暴露的：图片、JSON数据格式
         import banner from './banner.json';
         import floor from './floor.json';
-
+    
         //mock数据:第一个参数请求地址   第二个参数：请求数据
         Mock.mock("/mock/banner",{code:200,data:banner});//模拟首页大的轮播图的数据
         Mock.mock("/mock/floor",{code:200,data:floor});
-
+    
         Mock.mock( rurl, template )
         记录数据模板。当拦截到匹配 rurl 的 Ajax 请求时，将根据数据模板 template 生成模拟数据，并作为响应数据返回。
-
+    
         Mock.mock( rurl, function( options ) )
         记录用于生成响应数据的函数。当拦截到匹配 rurl 的 Ajax 请求时，函数 function(options) 将被执行，并把执行结果作为响应数据返回。
 
@@ -557,10 +558,11 @@ git pull origin master
     （4）创建 mockServer.js 通过mock插件实现模拟数据
     （5）mockServer.js文件在入口文件中引入 至少执行一次
 
-        
+
+​        
 20 轮播图实现
-    1.准备vuex数据
-        mockAjax
+​    1.准备vuex数据
+​        mockAjax
 
     2.swipper
         教程
@@ -590,7 +592,7 @@ git pull origin master
                        el: '.swiper-scrollbar',
                     },
                 ）
-
+    
     轮播图实现
         1.安装
             npm install swiper@5
@@ -602,20 +604,20 @@ git pull origin master
           new Swiper() 放在mounted中不可以实现效果
           因为 在mouted中 发送 异步请求 获取的数据，执行到 new Swiper()
           此时数据还未获得 因此v-for渲染不完整、
-
+    
         解决方案
             1.update
             2.定时器
             3.watch+nextTick （最终）
-
+    
         watch 监听数据变化
             【】 -> 变为有数据
             数据有了 但是此时无法保证 v-for页面结构是否完全渲染
-
+    
         Vue.nextTick( [callback, context] )
         vm.$nextTick( [callback] )
             在下次 DOM 更新 循环结束之后 执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。   
-
+    
             注意 该方法可以保证页面中的结构一定是完整的 经常和很多插件【需要dom已经存在了】一起使用
 
 
@@ -633,7 +635,7 @@ git pull origin master
     floor组件复用  因此不能在内部发请求 遍历
     发请求应该在其父组件中发送
     才想起来：伏组件给自组件穿一个参数，根据参数不同组件内部发送不同的请求？
-
+    
     组件通信的方式
         props 父->子组件传递值
         自定义事件：@on @emit 子组件给父组件
@@ -647,13 +649,13 @@ git pull origin master
         使用  v-for
             <Floor></Floor>
             <Floor></Floor>
-
+    
             <Footer v-show="$route.meta.showfooter"></Footer>
-
+    
     floor中的轮播图
         直接在mounted中 
             new Swiper(this.$ref.xxx,{
-
+    
             })
         因为次数已经取到数据，html的dom渲染完毕了
         因此可以在此时 使用插件
@@ -668,7 +670,7 @@ git pull origin master
     在Floor中尝试使用watch
         因为floor中数据没有发生变化 
         immdiate：true 立即执行
-    
+
 
     1.定义组件 components文件夹
     2.全局注册
@@ -681,9 +683,9 @@ git pull origin master
 23 search模块的静态组件
 
     vuex操作
-
+    
     post 请求 传递参数
-
+    
     action可以接受两个参数 contxet 和 方法入参
        actions: {
            checkout ({ commit, state }, products) {
@@ -691,24 +693,24 @@ git pull origin master
        }
     箭头函数 默认参数
        async getSearchlist({ commit }, params={}) {
-
+    
        }
 
 
     捞取数据
-
+    
     写法比较麻烦
         computed:{
             ...mapState({
                 goodsList:state =>state.search.searchlist.goodsList
             })
         }
-
+    
     使用getters
         相当于vuex的计算属性 ，简化仓库中的数据
         注意：仓库中的getters是不分模块的 state是分的
         mapGetters里面的传递的是数组
-
+    
         const getters = {
             // state是当前仓库的state
             goodsList(state){
@@ -716,7 +718,7 @@ git pull origin master
                 return state.searchlist.goodsList || {};
             },
         }
-
+    
         computed:{
             ...mapGetters(['goodsList'])
         }
@@ -728,7 +730,7 @@ git pull origin master
     1.在data里面定义需要传递的参数 及其 默认值，使得入参变成响应式的
     2.定义查询回调
     3.组件挂载之前需要根据地址栏参数，的时候要去查询结果
-
+    
     两种对象合并
         ES6：object.assign
             let obj1 = {name:'a',age:18};
@@ -736,7 +738,7 @@ git pull origin master
             let obj3 = {};
             Object.assign(obj3,obj1,obj2);
             console.log(obj3);//{name: "b", age: 18, gender: "man"}
-
+    
         ES6：拓展运算
             let obj1 = {name:'a',age:18};
             let obj2 = {name:'b',gender:'man'};
@@ -753,9 +755,9 @@ git pull origin master
     搜索区 点击搜索应该再次发送请求
     监听路由变化
     路由变化 则再次向服务器发送请求
-
+    
     问题？为啥监听$route 不需要深度监听
-
+    
     由于使用的是合并对象 因此吧三个含有id属性的参数清空,因为这三个id只需要一个就可以了
 
 
@@ -786,30 +788,30 @@ git pull origin master
 
         分类目录
             选中目录 展示面包屑 query参数添加
-
+    
         搜索关键字   
             点击搜索 展示搜索字段
-
+    
     2.点击x  移除对应面包屑
-
+    
         1、移除目录面包屑
             需要清空对应的目录名和目录id
             优化：因为对应的参数字段可有可无
                 将值传为 undefined 就可以不传到后台
-
+    
             问题 地址栏路径没有变化？
                 解：路由跳转到自己身上！ 
                 router.push 把query参数去掉 params参数
-
+    
          2、移除 【搜索关键字】面包屑
             1.清除页面展示
             2.处理地址栏
             3.清空搜索框
                 搜索框 是header 组件的内容
-
+    
             解决方案：
                 使用全局事件总线完成
-
+    
                 1.配置全局事件总线 main.js
                     new Vue({
                         router,
@@ -827,7 +829,7 @@ git pull origin master
                         this.keyWord = '';
                         })
                     },
-
+    
            解决的代码：
                 // 移除目录的面包屑
                 removeCatoryName() {
@@ -847,7 +849,7 @@ git pull origin master
                 // 再次发送请求
                 this.$router.push({ name: "search", query: this.$route.query });
                 },
-
+    
     3.处理面包屑 品牌信息
         点击品牌 
             面包屑展示品牌
@@ -855,7 +857,7 @@ git pull origin master
             清除面包屑品牌
             改变传参
             !! 不涉及路由的变化
-
+    
         问题
             1.品牌在子组件中
             2.需要发送请求 重新获取数据
@@ -869,16 +871,16 @@ git pull origin master
             this.$emit("tradeInfo",trademark)
         3.处理事件
             tradeInfo(info){
-
+    
             }
-
+    
         整理参数
-
+    
             this.searchParams.trademark = info.tmId + ":" + info.tmName;
             this.getData();
-
+    
     4.处理面包屑 商品属性筛选
-
+    
        问题1 商品属性是一个数组
             1、遍历展示
             2、不能使用 v-show v-if
@@ -899,7 +901,7 @@ git pull origin master
         order "1:desc" 
             1 代表综合 2代表价格
             初始值 默认"1:desc"
-
+    
         1.点击排序选项
             排序选项图标变亮 
                 通过order属性中的第一个值
@@ -918,7 +920,7 @@ git pull origin master
 
     分页组件 在项目中多处用到
     因此 设置为全局组件
-
+    
     自定义分页器
         1.分页器数据
             1 一共多少页面 total/pageNo  
@@ -932,21 +934,21 @@ git pull origin master
             4 一共有多少条数据 total
             5 连续的页码数  continue
                 1 2...7 8 9 10 11...
-
+    
     props接收三个参数
     computed 计算分页数
     算出去连续页码的起始数字和结束数字
         pageNo-Math.floor(continue/2)
         pageNo+Math.floor(continue/2)
-
+    
     当前为 第1页
      1 2 3 4 5
     当前为第2页
      1 2 3 4 5
-
+    
      end页大于总页数  end = 总页数
      start页小于1  start = 1
-
+    
      代码：
         startNumAndEndNum() {
             const { pageNo, totalPage, middleNum } = this;
@@ -969,23 +971,23 @@ git pull origin master
             }
             return { start, end };
         },
-
+    
     上中下三个部分来处理
-
+    
         中间遍历 start end
             <button v-for="(num,index) in startNumAndEndNum.end" :key="index" v-show="num >= startNumAndEndNum.start">{{num}}</button>
         
         上部分
             1   start > 1 时候才需要展示
             ... start = 1 或者2  的时候不展示 （start > 2）
-
+    
         结尾部分
            totalPage  end == totalPage的时候不展示  （end < totalPage）
            ... end == totalPage 或者 end == totalPage - 1 的时候不展示 （end < totalPage - 1）
 
 
     父组件动态获取子组件传参
-
+    
         1.参数可以从父组件中获取
         2.自定义事件
             获取当前是第几页
@@ -1005,26 +1007,26 @@ git pull origin master
 
 
 30 产品详情
-   
+
     1 静态组件
     2 发请求
     3 vuex
     4 动态展示数据
-
+    
     详情页面-静态组件
         1 还没有注册路由，路由配置
-
+    
         2 点击图片跳转路由
             需要携带产品的id
             /detail/:skuid
-
+    
         3 【滚动行为】问题：进入详情页面之后 进入到了页面底部
             解决 v-router中的滚动行为
-
+    
             使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。
              vue-router 能做到，而且更好，它让你可以自定义路由切换时页面如何滚动。
             注意: 这个功能只在支持 history.pushState 的浏览器中可用。
-
+    
             scrollBehavior 方法接收 to 和 from 路由对象。第三个参数 savedPosition 当且仅当 popstate 导航 (通过浏览器的 前进/后退 按钮触发) 时才可用。
             
             //如果你要模拟“滚动到锚点”的行为：
@@ -1055,18 +1057,18 @@ git pull origin master
     vuex
         新建一个detail库
         在vuex模块中配置
-
+    
         在vuex处理请求
-
+    
      动态展示数据
         1 数据结构相对复杂
             使用getters简化
-
+    
         2 问题prodInfo  初始化是一个空对象
         因此不可以在getters里面直接返回他的下一层数据
-
-        解决 加一个 ||{}
     
+        解决 加一个 ||{}
+
 
 
 31 放大镜 ZOOM
@@ -1076,7 +1078,7 @@ git pull origin master
         传的的数据是对象里面的 对象初始是一个空对象
         导致传的是的数据undefined
         因此需要处理 一层一层的处理
-
+    
         const getters = {   
             skuInfo(state){
                 return state.productInfo.skuInfo || {}
@@ -1093,25 +1095,25 @@ git pull origin master
             return this.skuImageList[0] || {}
             }
         }
-
+    
     2 轮播图
         1、展示轮播图
             dom渲染完成之后 使用swiper
             Vue.nextTick()
-
+    
                 mounted: function () {
                     this.$nextTick(function () {
                         // Code that will run only after the
                         // entire view has been rendered
                     })
                 }
-
+    
             Vue.nextTick 的原理和用途：https://segmentfault.com/a/1190000012861862
-
+    
         2、点谁谁高亮
-
+    
         3、点小图展示大图
-
+    
     3 放大镜效果
         1 蒙板跟着鼠标动
             获取蒙版的dom
@@ -1121,14 +1123,14 @@ git pull origin master
                 大图片是小图片放大两倍的结果
                 把图片移动到展示的区域内部。图片移动的距离是鼠标移动的两倍，且方向相反
                 鼠标左移  图片右移；鼠标右移  图片左移;
-            
+
 
 32 展示商品可选项
 
     1.从vuex中获取数据遍历展示
     2.售卖属性排他操作
         点谁 谁高亮
-
+    
         遍历中的对象是响应式的 改变它会引起vuex中数据的变化
             changAttrtive(spuSaleAttrValue, spuSaleAttrValueList) {
                 console.log(spuSaleAttrValue);
@@ -1146,11 +1148,11 @@ git pull origin master
 
     非法输入
         带有【非数字字符】的字符串*1 = NaN
-
+    
         NaN判断 取1
             由于 NaN 是唯一一个不等于自身的值，不像其他的值，可以用相等操作符来判断是否等于自身，NaN == NaN和 NaN === NaN都会返回false，所以isNaN()就诞生了
             isNaN(num)
-
+    
             https://www.cnblogs.com/moqijianqi/p/11413441.html
         小于1 取1
         小数  取整
@@ -1160,20 +1162,20 @@ git pull origin master
     点击加入购物车
         1、发请求
         2、跳转页面
-    
+
 
     加入购物车请求
         1 发请求
             返回结果无信息 不用存store
             /api/cart/addToCart/{ skuId }/{ skuNum }
-
+    
         2、本次请求加入购物车成功与失败的结果
             async 修饰的函数返回的是一个 promise
             this.$store.dispatch("addOrUpdateShopCart",params) 返回的是一个promise
-
+    
             let result = await reqAddOrUpdateShopCart(skuId,skuNum);
             result 不是promise 需要重新封装
-
+    
                 async addOrUpdateShopCart({commit},{skuId,skuNum}){
                     let result = await reqAddOrUpdateShopCart(skuId,skuNum);
                     console.log("加入购物车请求",result);
@@ -1183,7 +1185,7 @@ git pull origin master
                         return Promise.reject(new Error("添加购物车失败！"))
                     }
                 }
-
+    
                 async addShopCart() {
                     // 1 发请求存库
                     let params = {
@@ -1195,35 +1197,36 @@ git pull origin master
                     } catch (error) {
                     }
                 },
-
+    
         3 路由传递参数结合会话存储
-
+    
             skuNum使用路由传参
-
+    
             商品信息结构相对复杂
                  使用sessionStorage存储
                 只能存字符串 不能存对象
-
+    
     查看商品详情
         1、点击返回商品详情页
 
-    
+
+​    
 
 35 购物车部分
 
     跳转到购物车页面    
         路由配置
-
+    
     静态组件
         样式调整
-
+    
     获取购物车数据
         向服务器发送数据 vux操作三连环（api dispatch action mutation）
         
         需要身份鉴别 获取对应的购物车
             uuid游客身份获取购物车数据
             uuid已经引入 不需要安装
-
+    
             可以提供请求头携带参数
             uuid已经生成 就不需要在改变 loaclStorage缓存
 
@@ -1243,3 +1246,92 @@ git pull origin master
 37 批量删除商品
     没有批量删除的接口
     只能前端循环 调用单个删除接口
+
+38 登录注册静态组件
+    1.icons.png 多个组件都在使用
+        assets文件夹 
+            存放组件共用的静态资源
+            打包的时候 没有assets文件夹
+        
+        css中使用@ （src别名） 需要在前面加上一个~
+    
+        url(~@/assets/images/icons.png);
+
+39 注册业务
+
+    表单验证 暂不处理
+    
+    1、v-model获取表单数据
+    2、点击验证 发送请求
+        获取验证码的接口 是直接返回的验证码 而不是给用户发送短信
+    3、点击提交
+        默认提交 
+        接口调用成功 直接返回登录页面
+
+
+40 登录业务
+
+    token.js
+    user.js
+    
+    1、三件套
+        登录接口注册 手机号+密码
+        api
+        store
+        按钮提交
+    
+    2、关闭form的默认表单提交
+        @clcik.prevent
+    
+    3、token
+        token是服务器给的 用户的唯一标识 一般就是字符串
+        一般登录成功 服务器会下发token 前台持久化存token 
+        带着token找服务器要用户信息进行展示
+    
+        vuex中的数据不是持久化的
+        需要持久化token
+            localStorage
+    
+    4、获取用户信息
+        1、home组件挂载完毕之后 获取用户信息 getUserInfo
+        
+        2、请求拦截器
+            在拦截器里面 设置请求头token 为用户token信息
+    
+        3、vuex三连环
+    
+        4、token获取的用户信息 如何在所有页面展示
+    
+            多个组件获取用户信息需要mounted的时候dispatch action
+
+
+    5、用户已经登录 
+    
+        就不应该再登录了
+    
+    6、退出登录
+    
+        退出登录需要做的事情
+            1、发请求，通知服务器退出登录（清除一些数据）
+            2、清除本地缓存的一些用户信息（token，userinfo）
+
+40 导航守卫
+
+    1、已经登录就不能进入一些页面
+    2、登出则不能进入一些页面
+        token.js
+        user.js
+    
+
+    全局路由守卫
+        前置守卫
+            处理路由进入的问题
+
+            处理各个组件-已登录用户信息的展示
+
+
+
+
+
+
+
