@@ -60,3 +60,23 @@ export const reqUpdateCheckedById = (skuId,ischecked) => {
   return requests.get("/cart/checkCart/"+skuId+'/'+ischecked);
 };
 
+
+//URL:/api/user/passport/sendCode/{phone}  method:get
+// 获取验证码
+export const reqGetSMSCode = (phone) => {
+  return requests.get("/user/passport/sendCode/"+phone);
+} 
+
+    // password: "1234"
+    // phone: "13666667777"
+    // smscode: "501223"
+// 用户注册
+// url:/api/user/passport/register  method:post    phone code password
+export const reqUserRegister  = (params) =>{
+  return  requests.post("/user/passport/register",params)
+}
+
+export const reqUserLogin  = (params) =>{
+  // URL:/api/user/passport/login  method:post phone password
+  return  requests.post("/user/passport/login",params);
+}
