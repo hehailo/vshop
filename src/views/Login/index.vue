@@ -38,7 +38,8 @@
                 </label>
                 <span class="forget">忘记密码？</span>
               </div>
-              <button class="btn" @click="userLogin">登&nbsp;&nbsp;录</button>
+              <!--阻止表单提交的默认事件 -->
+              <button class="btn" @click.prevent="userLogin">登&nbsp;&nbsp;录</button>
             </form>
 
             <div class="call clearFix">
@@ -75,12 +76,6 @@
 </template>
 
 <script>
-
-
-// //获取用户信息【需要带着用户的token向服务器要用户信息】
-// //URL:/api/user/passport/auth/getUserInfo  method:get
-// export const reqUserInfo = ()=>requests({url:'/user/passport/auth/getUserInfo',method:'get'});
-
 export default {
   name: "Login",
   data() {
@@ -96,6 +91,7 @@ export default {
       try {
         await this.$store.dispatch("userLogin",params);
         // 跳转首页
+        this.$router.push("/home")
       } catch (error) {
         console.log(error);
       }

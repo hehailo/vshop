@@ -5,7 +5,11 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="userName">
+            <span>{{ userName }}</span>
+            <a class="register" @click="logout">退出登陆</a>
+          </p>
+          <p v-else>
             <span>请</span>
             <!-- <a href="###">登录</a>
             <a href="###" class="register">免费注册</a> -->
@@ -61,23 +65,33 @@ export default {
       keyWord: "",
     };
   },
-  mounted(){
-    this.$bus.$on("clearKeyWord",()=>{
-      this.keyWord = '';
-    })
+  mounted() {
+    this.$bus.$on("clearKeyWord", () => {
+      this.keyWord = "";
+    });
+  },
+  computed: {
+    userName() {
+      return this.$store.state.user.userInfo.name ||'';
+    },
   },
   methods: {
     goSearch() {
       // this.$router.push("/search/"+this.keyWord)
       let location = {
         name: "search",
-        params: { keyword: this.keyWord || undefined},
+        params: { keyword: this.keyWord || undefined },
       };
       if (this.$route.query) {
         location.query = this.$route.query;
       }
       this.$router.push(location);
     },
+    async logout(){
+      this.$store.dispatch("userLogout")
+      // 回到首页
+      this.$router.push("/home");
+    }
   },
 };
 </script>

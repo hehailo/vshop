@@ -1302,8 +1302,11 @@ git pull origin master
     
         4、token获取的用户信息 如何在所有页面展示
     
-            多个组件获取用户信息需要mounted的时候dispatch action
-
+            x 多个组件获取用户信息需要mounted的时候dispatch action 
+              通过全局路由首位来处理
+                判断有没有token
+                页面有userinfo 就直接放行
+                没有就重新dsipatch
 
     5、用户已经登录 
     
@@ -1329,9 +1332,18 @@ git pull origin master
 
             处理各个组件-已登录用户信息的展示
 
+            router.beforeEach(function (to, from, next) {
+                if (to.path === '/forbidden') {
+                    next(false)
+                } else {
+                    next()
+                }
+            })
 
 
 
 
 
+登陆账号：
+    18155558888 1234
 
