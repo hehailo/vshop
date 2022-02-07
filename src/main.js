@@ -22,9 +22,14 @@ Vue.component(Carousel.name,Carousel)
 Vue.component(Pagination.name,Pagination)
 
 
+// 引入插件
+import {Message} from 'element-ui';;
+;
+
+Vue.prototype.$message = Message;
+
+
 Vue.config.productionTip = false;
-
-
 new Vue({
   router,
   store,//多了一个¥store

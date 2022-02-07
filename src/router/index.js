@@ -54,7 +54,7 @@ let router = new VueRouter({
 // 全局路由前置守卫
 router.beforeEach(async (to, from, next) => {
   // 全局路由前置守卫
-  console.log("全局路由前置守卫");
+  // console.log("全局路由前置守卫");
   console.log(to, from);
   //函数体
   let token = store.state.user.token;

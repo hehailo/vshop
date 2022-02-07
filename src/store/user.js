@@ -57,7 +57,7 @@ const actions = {
       commit("LOGINTOKEN", result.data?.token);
       return "ok";
     } else {
-      return Promise.reject("用户注册失败， " + result.message);
+      return Promise.reject("用户登录失败， " + result.message);
     }
   },
 
@@ -68,7 +68,7 @@ const actions = {
       console.log("获取的登陆信息！！", result.data);
       commit("USERINFO", result.data);
     } else {
-      return Promise.reject("用户注册失败， " + result.message);
+      return Promise.reject("获取用户信息失败， " + result.message);
     }
   },
   // 退出登陆
@@ -79,7 +79,7 @@ const actions = {
       commit("CLEAR");
       return "ok";
     } else {
-      return Promise.reject("用户注册失败， " + result.message);
+      return Promise.reject("用户退出登陆失败， " + result.message);
     }
   },
 };

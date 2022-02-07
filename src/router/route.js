@@ -6,9 +6,43 @@ import Login from "@/views/Login";
 import Detail from "@/views/Detail";
 import AddCartSuccess from "@/views/AddCartSuccess";
 import ShopCart from "@/views/ShopCart";
+import Trade from '@/views/Trade';
+import Pay from '@/views/Pay';
+import PaySuccess from '@/views/PaySuccess';
+import Center from '@/views/Center';
+;
+
 
 //路由配置信息
 export default [
+  {
+    path: "/paysuccess",
+    component: PaySuccess,
+    meta: {
+      showfooter: true,
+    },
+  },
+  {
+    path: "/pay",
+    component: Pay,
+    meta: {
+      showfooter: Pay,
+    },
+  },
+  {
+    path: "/trade",
+    component: Trade,
+    meta: {
+      showfooter: true,
+    },
+  },
+  {
+    path: "/center",
+    component: Center,
+    meta: {
+      showfooter: true,
+    },
+  },
   {
     path: "/home",
     component: Home,

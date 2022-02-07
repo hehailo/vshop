@@ -18,7 +18,7 @@ const requests = axios.create({
 requests.interceptors.request.use(
   (config) => {
     nprogress.start();
-    console.log("请求拦截", config.url);
+    // console.log("请求拦截", config.url);
     let uuid_token = store.state.shopcart.uuid_token;
     if (uuid_token) {
       config.headers.userTempId = uuid_token;
@@ -39,7 +39,7 @@ requests.interceptors.request.use(
 requests.interceptors.response.use(
   (response) => {
     // response 包括响应头等hhtp请求的部分
-    console.log("响应拦截", response.data);
+    // console.log("响应拦截", response.data);
     nprogress.done();
     return response.data;
   },
