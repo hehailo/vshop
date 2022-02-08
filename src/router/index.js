@@ -54,7 +54,7 @@ let router = new VueRouter({
 // 全局路由前置守卫
 router.beforeEach(async (to, from, next) => {
   // 全局路由前置守卫
-  // console.log("全局路由前置守卫");
+  console.log("全局路由前置守卫");
   console.log(to, from);
   //函数体
   let token = store.state.user.token;
@@ -82,11 +82,11 @@ router.beforeEach(async (to, from, next) => {
     let toPath = to.path
     console.log("未登陆不准入页面");
     //未登陆不与准入页面
-    if (toPath.indexOf("center") != -1) {
-      next("/login");
-    } else {
+    // if (toPath.indexOf("center") != -1) {
+    //   next("/login");
+    // } else {
       next();
-    }
+    // }
   }
 });
 

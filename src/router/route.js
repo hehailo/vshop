@@ -6,12 +6,13 @@ import Login from "@/views/Login";
 import Detail from "@/views/Detail";
 import AddCartSuccess from "@/views/AddCartSuccess";
 import ShopCart from "@/views/ShopCart";
-import Trade from '@/views/Trade';
-import Pay from '@/views/Pay';
-import PaySuccess from '@/views/PaySuccess';
-import Center from '@/views/Center';
-;
-
+import Trade from "@/views/Trade";
+import Pay from "@/views/Pay";
+import PaySuccess from "@/views/PaySuccess";
+import Center from "@/views/Center";
+// import MyOrder from '@/views/Center/MyOrder';
+// import GroupOrder from '@/views/Center/GroupOrder';
+// ;
 
 //路由配置信息
 export default [
@@ -28,6 +29,7 @@ export default [
     meta: {
       showfooter: Pay,
     },
+    props: ($route) => ({ orderId: $route.query.orderId }),
   },
   {
     path: "/trade",
@@ -42,6 +44,20 @@ export default [
     meta: {
       showfooter: true,
     },
+    children: [
+      {
+        path: "myorder",
+        component: () => import("@/views/Center/MyOrder"),
+      },
+      {
+        path: "grouporder",
+        component: () => import("@/views/Center/GroupOrder"),
+      },
+      {
+        path:'',
+        redirect:'myorder'
+      }
+    ],
   },
   {
     path: "/home",
@@ -118,5 +134,4 @@ export default [
       showfooter: true,
     },
   },
-
 ];

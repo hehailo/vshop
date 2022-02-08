@@ -16,7 +16,6 @@ const requests = axios.create({
 requests.interceptors.request.use(
   (config) => {
     nprogress.start();
-    console.log("mock请求拦截", config.baseURL + config.url);
     return config;
   },
   (error) => {
@@ -27,7 +26,6 @@ requests.interceptors.request.use(
 // 响应拦截器
 requests.interceptors.response.use(
   (response) => {
-    console.log("mock响应拦截", response.data);
     nprogress.done();
     return response.data;
   },

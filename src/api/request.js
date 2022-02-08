@@ -25,7 +25,6 @@ requests.interceptors.request.use(
     }
     let token = store.state.user.token;
     if (token) {
-      console.log("token！！！");
       config.headers.token = token;
     }
     return config;

@@ -3,30 +3,19 @@
     <h3 class="title">填写并核对订单信息</h3>
     <div class="content">
       <h5 class="receive">收件人信息</h5>
-      <div class="address clearFix">
-        <span class="username selected">张三</span>
-        <p>
-          <span class="s1">北京市昌平区宏福科技园综合楼6层</span>
-          <span class="s2">15010658793</span>
-          <span class="s3">默认地址</span>
+      <div class="address clearFix" v-for="item in addressInfo" :key="item.id">
+        <span :class="{ username: true, selected: item.isDefault == 1 }">
+          {{ item.consignee }}</span
+        >
+        <p @click="changeDefault(item, addressInfo)">
+          <span class="s1">{{ item.fullAddress }}</span>
+          <span class="s2">{{ item.phoneNum }}</span>
+          <span class="s3" v-show="item.isDefault == 1"
+            ><el-button type="danger" size="mini">默认地址</el-button></span
+          >
         </p>
       </div>
-      <div class="address clearFix">
-        <span class="username selected">李四</span>
-        <p>
-          <span class="s1">北京市昌平区宏福科技园综合楼6层</span>
-          <span class="s2">13590909098</span>
-          <span class="s3">默认地址</span>
-        </p>
-      </div>
-      <div class="address clearFix">
-        <span class="username selected">王五</span>
-        <p>
-          <span class="s1">北京市昌平区宏福科技园综合楼6层</span>
-          <span class="s2">18012340987</span>
-          <span class="s3">默认地址</span>
-        </p>
-      </div>
+
       <div class="line"></div>
       <h5 class="pay">支付方式</h5>
       <div class="address clearFix">
@@ -44,38 +33,26 @@
       </div>
       <div class="detail">
         <h5>商品清单</h5>
-        <ul class="list clearFix">
+        <ul
+          class="list clearFix"
+          v-for="(order, index) in orderInfo.detailArrayList"
+          :key="order.skuId"
+        >
           <li>
-            <img src="./images/goods.png" alt="" />
+            <img
+              :src="order.imgUrl"
+              alt=""
+              style="width: 100px; height: 100px"
+            />
           </li>
           <li>
-            <p>
-              Apple iPhone 6s (A1700) 64G 玫瑰金色
-              移动联通电信4G手机硅胶透明防摔软壳 本色系列
-            </p>
+            <p>{{ order.skuName }}</p>
             <h4>7天无理由退货</h4>
           </li>
           <li>
-            <h3>￥5399.00</h3>
+            <h3>￥{{ order.orderPrice }}.00</h3>
           </li>
-          <li>X1</li>
-          <li>有货</li>
-        </ul>
-        <ul class="list clearFix">
-          <li>
-            <img src="./images/goods.png" alt="" />
-          </li>
-          <li>
-            <p>
-              Apple iPhone 6s (A1700) 64G 玫瑰金色
-              移动联通电信4G手机硅胶透明防摔软壳 本色系列
-            </p>
-            <h4>7天无理由退货</h4>
-          </li>
-          <li>
-            <h3>￥5399.00</h3>
-          </li>
-          <li>X1</li>
+          <li>X{{ order.skuNum }}</li>
           <li>有货</li>
         </ul>
       </div>
@@ -84,6 +61,7 @@
         <textarea
           placeholder="建议留言前先与商家沟通确认"
           class="remarks-cont"
+          v-model="msg"
         ></textarea>
       </div>
       <div class="line"></div>
@@ -110,44 +88,101 @@
       </ul>
     </div>
     <div class="trade">
-      <div class="price">应付金额:　<span>¥5399.00</span></div>
+      <div class="price">
+        应付金额: <span>¥{{ orderInfo.totalAmount }}.00</span>
+      </div>
       <div class="receiveInfo">
         寄送至:
-        <span>北京市昌平区宏福科技园综合楼6层</span>
-        收货人：<span>张三</span>
-        <span>15010658793</span>
+        <span>{{ userDefaultAddress.fullAddress }}</span>
+        收货人：<span>{{ userDefaultAddress.consignee }}</span>
+        <span>{{ userDefaultAddress.phoneNum }}</span>
       </div>
     </div>
     <div class="sub clearFix">
-      <router-link class="subBtn" to="/pay">提交订单</router-link>
+      <a plain class="subBtn" @click="submitOrder">
+        <el-button type="danger">提交订单</el-button>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Trade",
   mounted() {
     this.getBasicInfo();
   },
+  data() {
+    return {
+      msg: "",
+      orderId: "",
+    };
+  },
+  computed: {
+    ...mapState({
+      addressInfo: (state) => state.trade.address,
+      orderInfo: (state) => state.trade.orderInfo,
+    }),
+    userDefaultAddress() {
+      return (
+        this.addressInfo.find((element) => {
+          //函数体
+          return element.isDefault == 1;
+        }) || {}
+      );
+    },
+  },
   methods: {
     async getBasicInfo() {
       try {
         // 获取地址信息
-        let a =  this.$store.dispatch("getUserAddress");
-        console.log("查看执行的顺序！！！");
-        // 获取订单信息
+        let a = this.$store.dispatch("getUserAddress");
+        // // 获取订单信息
         let b = this.$store.dispatch("getOrderInfo");
-        let d = await Promise.all([a,b])
-        console.log("d",d);
-
+        let d = await Promise.all([a, b]);
       } catch (error) {
-         console.log("dyyyyy",error);
-        this.$message({
-          message: error.message,
-          type: "warning",
-        });
+        // this.$message({
+        //   message: error,
+        //   type: "warning",
+        // });
+
+        this.$message.error(error);
       }
+    },
+    changeDefault(item, addressInfo) {
+      addressInfo.forEach((element) => {
+        element.isDefault = 0;
+      });
+      item.isDefault = 1;
+    },
+    async submitOrder() {
+      let { tradeNo } = this.orderInfo;
+      //其余的六个参数
+      let data = {
+        consignee: this.userDefaultAddress.consignee, //最终收件人的名字
+        consigneeTel: this.userDefaultAddress.phoneNum, //最终收件人的手机号
+        deliveryAddress: this.userDefaultAddress.fullAddress, //收件人的地址
+        paymentWay: "ONLINE", //支付方式
+        orderComment: this.msg, //买家的留言信息
+        orderDetailList: this.orderInfo.detailArrayList, //商品清单
+      };
+      //需要带参数的：tradeNo
+      // let result = await this.$API.reqSubmitOrder(tradeNo, data);
+      //提交订单成功
+      // if (result.code == 200) {
+        // this.orderId = result.data;
+        this.orderId = 2592;
+
+        //路由跳转 + 路由传递参数
+        this.$router.push("/pay?orderId=" + this.orderId);
+        //提交的订单失败
+      // } else {
+      //   this.$message({
+      //     message: result.data,
+      //     type: "warning",
+      //   });
+      // }
     },
   },
 };
@@ -231,8 +266,6 @@ export default {
           height: 24px;
           line-height: 24px;
           margin-left: 10px;
-          background-color: #878787;
-          color: #fff;
           margin-top: 3px;
           text-align: center;
         }
@@ -394,8 +427,6 @@ export default {
       font: 700 18px "微软雅黑";
       line-height: 56px;
       text-align: center;
-      color: #fff;
-      background-color: #e1251b;
     }
   }
 }

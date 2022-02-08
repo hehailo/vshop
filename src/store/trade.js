@@ -7,35 +7,32 @@ const state = {
 
 const mutations = {
   GETUSERADDRESS(state, data) {
-    state.address = address;
+    state.address = data;
   },
   GETORDERINFO(state, data) {
-    state.orderInfo = orderInfo;
+    state.orderInfo = data;
   },
 };
 
 const actions = {
   //获取用户地址信息
   async getUserAddress({ commit }) {
-      console.log("getUserAddress-----");
     let result = await reqAddressInfo();
     if (result.code == 200) {
       commit("GETUSERADDRESS", result.data);
       return "ok";
     } else {
-      return Promise.reject(result.message || "查询失败！");
+      return Promise.reject(result.message || "获取用户地址信息查询失败！");
     }
   },
   //获取商品清单数据
   async getOrderInfo({ commit }) {
-    console.log("getOrderInfo---2222--");
     let result = await reqOrderInfo();
-    console.log(result);
     if (result.code == 200) {
       commit("GETORDERINFO", result.data);
       return "ok";
     } else {
-      return Promise.reject(result.message || "查询失败！");
+      return Promise.reject(result.message || "获取商品清单数据查询失败！");
     }
   },
 };
